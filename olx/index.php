@@ -68,24 +68,61 @@ if((isset($_SESSION['zalogowany'])) && ($_SESSION['zalogowany']==true))
           
           <form action="rejestracja.php" method="post">
           				<h1>Rejestracja</h1>
-          				<h1><small>
-       LOGIN: <input type="text" name="login-r">
-       <?php
+        <h1><small>
+       	LOGIN:
+       	<br> 
+       	<input type="text" name="login-r">
+     <?php
 
-       if(isset($_SESSION['error-log']))
-       {
-       	echo '<div class="error">'.$_SESSION['error-log'].'</div>';
+     if(isset($_SESSION['error-log']))
+     {
+     	echo '<div class="error">'.$_SESSION['error-log'].'</div>';
        	unset($_SESSION['error-log']);
-       }
+     }
 
-       ?>
+     ?>
 		<br> 
-     HASŁO:<input type="password" name="haslo-r">
+     	HASŁO:
+     	<br>
+     	<input type="password" name="haslo-r">
+     	<?php
+
+     	if(isset($_SESSION['error-haslo']))
+       	{
+       	echo '<div class="error">'.$_SESSION['error-haslo'].'</div>';
+       	unset($_SESSION['error-haslo']);
+       	}
+
+     	?>
+     	<br>
+     	POWTÓRZ HASŁO:
+     	<br>
+     	<input type="password" name="haslo-r2">
        	<br>
-       EMAIL: <input type="text" name="email-r">
+       	EMAIL: 
+       	<br>
+       	<input type="text" name="email-r">
+     <?php
+
+     if(isset($_SESSION['error-email']))
+       {
+       	echo '<div class="error">'.$_SESSION['error-email'].'</div>';
+       	unset($_SESSION['error-email']);
+       	}
+
+     ?>
        <br>
-      					</small></h1>
+      	</small></h1>
       	<input type="submit" class="name" value="Przejdz dalej">
+      	 <?php
+
+	     if(isset($_SESSION['pass']))
+	       {
+	       	echo '<div class="error">'.$_SESSION['pass'].'</div>';
+	       	unset($_SESSION['pass']);
+	       	}
+
+     	?>	
           </form>
           
           <?php
