@@ -42,26 +42,41 @@ if(!isset($_SESSION['zalogowany']))
       	<div class="main">
         <div class="row jumbotron">
         <div class="col-12 col-md-4 text text-center container">
-          
-        <?php 
-        echo "Witaj, " . $_SESSION['login']."<br> Zostałeś zalogowany <br> <a href='logout.php'>Wyloguj się</a>";
-        ?>
-		
-          
+        <form action="zhaslo.php" method="post">
+        <h1>Zmiana hasła</h1>
+        <h1><small>
+     	HASŁO:
+     	<br>
+     	<input type="password" name="haslo-z">
+		<?php
 
-          <br>
-          <br>
-		  
-		  <a href="zmienemail.php"><input type="button" class="name" value="Zmień adres e-mail"/></a>
-		  
-		  <br>
-		  
-		  <a href="zmienhaslo.php"><input type="button" class="name" value="Zmień hasło"/></a>
-		  
-		  <br>
-		  <br>
-		  
-		  <a href="#"><input type="button" class="name" value="Dodaj nowe ogłoszenie"/></a>
-		  <a href="#"><input type="button" class="name" value="Wyświetl swoje ogłoszenia"/></a>
+     	if(isset($_SESSION['error-haslo']))
+       	{
+       	echo '<div class="error">'.$_SESSION['error-haslo'].'</div>';
+       	unset($_SESSION['error-haslo']);
+       	}
+
+     	?>
+     	<br>
+     	POWTÓRZ HASŁO:
+     	<br>
+     	<input type="password" name="haslo-z2">
+       	<br>
+      	</small></h1>
+      	<input type="submit" class="name" value="Zmien hasło">
+		<?php
+
+	     if(isset($_SESSION['pass']))
+	       {
+	       	echo '<div class="error">'.$_SESSION['pass'].'</div>';
+	       	unset($_SESSION['pass']);
+	       	}
+
+     	?>
+        </form>
+		<br><br>
+		
+		<a href="ogloszenia.php"><input type="button" class="name" value="Powrót"/></a>
+		
 </body>
 </html>

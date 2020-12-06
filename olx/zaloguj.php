@@ -1,8 +1,8 @@
 <?php
   session_start();
-  if(!isset($_post['login']))|| (!isset($_POST['haslo']))
+  if ((!isset($_POST['login'])) || (!isset($_POST['haslo']))) 
   {
-  	header('location: index.php');
+  	header('Location: index.php');
   	exit();
   }
   require_once "connect.php";

@@ -26,7 +26,7 @@ session_start();
 		$emailr = $_POST['email-r'];
 		$email_san = filter_var($emailr,FILTER_SANITIZE_EMAIL);
 
-	if((filter_var($email_san, FILTER_SANITIZE_EMAIL)==false) || ($email_san!=$emailr))
+	if((filter_var($email_san, FILTER_VALIDATE_EMAIL)==false) || ($email_san!=$emailr))
 	{
 		$flaga=false;
 		$_SESSION['error-email']="Podaj poprawny adres email";
