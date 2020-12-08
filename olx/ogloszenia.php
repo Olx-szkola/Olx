@@ -44,7 +44,7 @@ if(!isset($_SESSION['zalogowany']))
         <div class="col-12 col-md-4 text text-center container">
           
         <?php 
-        echo "Witaj, " . $_SESSION['login']."<br> Zostałeś zalogowany <br> <a href='logout.php'>Wyloguj się</a>";
+        echo "<h1>Witaj,</h1> "."<h1>" . $_SESSION['login']."</h1>"."<br><h1> Zostałeś zalogowany <br> <a href='logout.php'>Wyloguj się</a></h1>";
         ?>
 		
           
@@ -62,6 +62,79 @@ if(!isset($_SESSION['zalogowany']))
 		  <br>
 		  
 		  <a href="#"><input type="button" class="name" value="Dodaj nowe ogłoszenie"/></a>
-		  <a href="#"><input type="button" class="name" value="Wyświetl swoje ogłoszenia"/></a>
+		  <a href="#"><input type="button" class="name" value="Wyświetl swoje ogłoszenia"/></a></div></div>
+
+      <br>
+      <br>
+
+      
+      <div class="row jumbotron">
+      <div class="col-12 col-md-4 text text-center container">
+
+        <form action="posts/add_posts.php" method="POST" enctype="multipart/form-data">
+        <h1>Dodaj swoje ogłoszenie</h1> 
+        <br/>
+        <label for="survey">Opis usługi:</label>
+        </br>
+        <textarea class="name" name="survey" cols="70%" rows="3" id="survey"></textarea>
+        </br></br>
+        Typ usługi:</br> &nbsp; <select class="name" name="type">
+        <option value="Murarz">Murarz</option>
+        <option value="Tynkarz">Tynkarz</option>
+        <option value="Płytkarz">Płytkarz</option>
+        <option value="cieśla">Cieśla</option>
+        <option value="akrobata">akrobata</option>
+        </select>
+        </br>
+        </br>
+        Zdjęcie: </br> &nbsp; <input type="file" class="name" name="photo">
+        </br></br>
+        <input type="submit" class="name" name="send" value="Wyślij" >
+      </div>
+    </div>
+        </form>
+
+
+        <?php
+        if(isset($_SESSION['win']))
+        {
+          echo '<div class="row jumbotron"><div class="col-12 col-md-4 text text-center container">'.$_SESSION['win'].'</div>'.'</div>';
+            unset($_SESSION['win']);
+
+        }
+        if(isset($_SESSION['lose']))
+        {
+          echo '<div class="row jumbotron"><div class="col-12 col-md-4 text text-center container">'.$_SESSION['lose'].'</div>'.'</div>';
+            unset($_SESSION['lose']);
+        }
+        ?>
+        <div class="row jumbotron">
+      <div class="col-12 col-md-4 text text-center container">
+        <h1>Twoje ogłoszenia:</h1>
+      </div>
+    </div>
+        <?php
+        include('connect.php');
+        mysqli_report(MYSQLI_REPORT_STRICT);
+
+        $owner = $_SESSION['login'];
+
+        $view=$conn->query("SELECT * FROM POSTS WHERE OWNER = '$owner'");
+        
+        while($row = $view->fetch_assoc())
+
+        {
+        echo '<div class="row jumbotron"><div class="col-12 col-md-4 text text-center container">';
+        echo "<br>"."Właściciel:&nbsp;".$row['owner'];
+        echo "<br>"."Data dodania:&nbsp;".$row['data'];
+        echo "<br>"."Rodzaj działalności:&nbsp;".$row['type'];
+        echo "<br>"."Opis:&nbsp;".$row['survey'];
+        echo "<br>"."<img src='".$row['photo']."'";
+
+        }
+          ?>
+
+      </div>
+      </div>
 </body>
 </html>
