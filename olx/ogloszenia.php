@@ -1,6 +1,6 @@
 <?php
 session_start();
-if(!isset($_SESSION['zalogowany']))
+if(!isset($_SESSION['zalogowany'])) 
 {
   header('Location: index.php');
   exit();
@@ -9,21 +9,9 @@ if(!isset($_SESSION['zalogowany']))
 <!DOCTYPE html>
 <html>
   <head>
-    <title>OLX</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="style.css">
-    
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-flat.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css"
-     integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <?php include('html_includes/header.php'); ?>
   </head>
-  <body>
+  <body style="background color:  #f2f2f2;">
     <nav class="navbar navbar-expand-sm row container">
          <div class="col-12 col-md-12 col-lg-6 col-sm-4 text-right">
            <a class="navbar-brand" href="#">
@@ -113,28 +101,32 @@ if(!isset($_SESSION['zalogowany']))
         <h1>Twoje ogłoszenia:</h1>
       </div>
     </div>
+    <div class="row jumbotron"><div class="col-12 col-md-4 text text-center container">    
+
         <?php
-        include('connect.php');
-        mysqli_report(MYSQLI_REPORT_STRICT);
+        require_once('like/like.php');
+        foreach($view as $post): ?>
 
-        $owner = $_SESSION['login'];
-
-        $view=$conn->query("SELECT * FROM POSTS WHERE OWNER = '$owner'");
         
-        while($row = $view->fetch_assoc())
+        
+        <br>Właściciel:&nbsp;<?php echo $post['owner'] ?>
+        <br>Data dodania:&nbsp;<?php echo $post['data'] ?>
+        <br>Rodzaj działalności:&nbsp;<?php echo $post['type']?>
+        <br>Opis:&nbsp;<?php echo $post['survey']?>
+        <br><img src='<?php echo $post['photo']?>'>
+        <br><i class="fa fa-thumbs-up like-btn" data-id="<?php echo $post['id']?>"></i>&nbsp;<i class ="fa fa-thumbs-down like-btn" data-id="<?php echo $post['id']?>"></i>
+        <br>
 
-        {
-        echo '<div class="row jumbotron"><div class="col-12 col-md-4 text text-center container">';
-        echo "<br>"."Właściciel:&nbsp;".$row['owner'];
-        echo "<br>"."Data dodania:&nbsp;".$row['data'];
-        echo "<br>"."Rodzaj działalności:&nbsp;".$row['type'];
-        echo "<br>"."Opis:&nbsp;".$row['survey'];
-        echo "<br>"."<img src='".$row['photo']."'";
+         <?php endforeach; ?>
 
-        }
-          ?>
+
+        
+        <!-- JQUERY SCRIPT -->
+        <script src="script.js"></script>
+
 
       </div>
       </div>
+    </div>
 </body>
 </html>

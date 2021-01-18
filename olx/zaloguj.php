@@ -40,8 +40,10 @@
   		}
   		else
   		{
-  			$_SESSION['blad'] = "Błąd niepoprawny login lub hasło!";
+  			$_SESSION['blad'] = "<div class='alert alert-danger error' role='alert'>
+         Błąd niepoprawny login lub hasło!</div>";
   			header('location:index.php');
+
   		}
 
   	}

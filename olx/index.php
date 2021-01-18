@@ -9,83 +9,109 @@ if((isset($_SESSION['zalogowany'])) && ($_SESSION['zalogowany']==true))
 <!DOCTYPE html>
 <html>
   <head>
-    <title>OLX</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="style.css">
-    
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-flat.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.12/css/all.css"
-     integrity="sha384-G0fIWCsCzJIMAVNQPfjH08cyYaUtMwjJwqiRKxxE/rx96Uroj1BtIQ6MLJuheaO9" crossorigin="anonymous">
-     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-     
+    <?php include('html_includes/header.php'); ?>
   </head>
   <body>
-    <nav class="navbar navbar-expand-sm row container">
-         <div class="col-12 col-md-12 col-lg-6 col-sm-4 text-right">
-           <a class="navbar-brand" href="#">
-           <img src="images/logo.png" alt="logo" style="width: 30%">
-         </a>
-       </div>
-       
-          <ul class="navbar-nav menu">
-               <li class="nav-item">
-                  <a class="nav-link" href="#">Welcome </a>
-               </li>
-               <li class="nav-item">
-               	  <a class="nav-link" href="rejestracja.php"> Rejestracja </a>
-               </li>
-               
-           </ul>
-        </div>
-      </nav>
 
-      	<div class="main">
-        <div class="row jumbotron">
-        <div class="col-12 col-md-4 text text-center container">
+      	<div class="main-true">
+        
+        
+        
+        <div class="fluid_container">
+        <div id="block2" class="">
+
+          <div class="main_container">
+          <div class="login_container">
           
+          
+          <button id="btn1" name="btn1" onclick="przejdz();" class="btn btn-light">Logowanie</button>
+          <button name="btn2" id="btn2" onclick="przejdz1();" class="btn btn-light">Nowe konto</button>
+          <div class="form-group">
           <form action="zaloguj.php" method="post">
-          				<h1>Logowanie</h1>
-          				<h1><small>
-        LOGIN: <input type="text" name="login">
-		<br> 
-       HASŁO: <input type="password" name="haslo">
-      					</small></h1>
-      	<input type="submit" class="name" value="Zaloguj się">
-          </form>
+          
+          
+          </div>
+
+          <div class="space">
+          <input type="text" class="form-control" id="login" aria-describedby="emailHelp" placeholder="Wpisz login" name="login" id="sprawdzmail">
+          </div>
+          <div class="space">
+          <input type="password" class="form-control" id="haslo" placeholder="Hasło" name="haslo">
+          </div>
+
+      	 <input class="btn btn-primary btn_width" type="submit" id="submit" name="name" value="Zaloguj się">
+         
+        </form>
+
+        <script type="text/javascript">
+
+        function przejdz(){
+        var element1 = document.getElementById("blok1");
+        var element2 = document.getElementById("block2");
+        if(document.getElementById("btn2").value == 0)
+        {
+          element1.classList.add("active");
+          element2.classList.remove("active");
+        }
+      }
+        function przejdz1(){
+        var element1 = document.getElementById("blok1");
+        var element2 = document.getElementById("block2");
+        if(document.getElementById("btn1").value == 0)
+        {
+          element2.classList.add("active");
+          element1.classList.remove("active");
+        }
+      
+        }
+        </script>
         </div>
+        </div>
+        <?php
+          if(isset($_SESSION['blad']))
+          {
+            echo $_SESSION['blad'];
+          }
+          unset($_SESSION['blad']);
+          ?>
+          <div id="ee"></div>
     </div>
+
+
+    
 
 
 
         
-        <div class="row jumbotron">
-        <div class="col-12 col-md-4 text text-center container">
-          
-          <form action="rejestracja.php" method="post">
-          				<h1>Rejestracja</h1>
-        <h1><small>
-       	LOGIN:
-       	<br> 
-       	<input type="text" name="login-r">
+        <div class="fluid_container">
+        <div id="blok1" class="active">
+
+        <div class="main_container">
+
+        <div class="form-group">
+        
+        <div class="register_container">
+        <button id="btn1" name="btn1" onclick="przejdz()" class="btn btn-light">Logowanie</button>
+        <button name="btn2" id="btn2" onclick="przejdz1()" class="btn btn-light">Nowe konto</button>
+        <form action="rejestracja.php"  method="post">    
+        <div class="space">    				
+       	<input type="text" class="form-control"  aria-describedby="emailHelp" placeholder="Wpisz login" name="login-r" id="sprawdzmail">
+        
+        </div>
      <?php
 
      if(isset($_SESSION['error-log']))
      {
-     	echo '<div class="error">'.$_SESSION['error-log'].'</div>';
+     	echo '<div id="error" class="alert alert-danger" role="alert">'.$_SESSION['error-log'].'</div>';
        	unset($_SESSION['error-log']);
      }
-
      ?>
-		<br> 
-     	HASŁO:
-     	<br>
-     	<input type="password" name="haslo-r">
-     	<?php
+     
+      
+      <div class="space">
+     	<input type="password" class="form-control"  aria-describedby="emailHelp" placeholder="Wpisz hasło" name="haslo-r" id="sprawdzmail">
+     	</div>
+      <?php
 
      	if(isset($_SESSION['error-haslo']))
        	{
@@ -94,14 +120,12 @@ if((isset($_SESSION['zalogowany'])) && ($_SESSION['zalogowany']==true))
        	}
 
      	?>
-     	<br>
-     	POWTÓRZ HASŁO:
-     	<br>
-     	<input type="password" name="haslo-r2">
-       	<br>
-       	EMAIL: 
-       	<br>
-       	<input type="text" name="email-r">
+      <div class="space">
+     	<input type="password" class="form-control"  aria-describedby="emailHelp" placeholder="Powtórz hasło" name="haslo-r2" id="sprawdzmail">
+      </div>
+      <div class="space">
+      <input type="text" class="form-control"  aria-describedby="emailHelp" placeholder="Wpisz email" name="email-r" id="sprawdzmail">
+      </div>     
      <?php
 
      if(isset($_SESSION['error-email']))
@@ -112,9 +136,10 @@ if((isset($_SESSION['zalogowany'])) && ($_SESSION['zalogowany']==true))
 
      ?>
        <br>
-      	</small></h1>
-      	<input type="submit" class="name" value="Przejdz dalej">
-      	 <?php
+      	<div class="space">
+      	<input class="btn btn-primary btn_width" type="submit" class="name" value="Przejdz dalej">
+      	 </div>
+         <?php
 
 	     if(isset($_SESSION['pass']))
 	       {
@@ -124,12 +149,12 @@ if((isset($_SESSION['zalogowany'])) && ($_SESSION['zalogowany']==true))
 
      	?>	
           </form>
+        </div>
           
-          <?php
-          	if(isset($_SESSION['blad']))
-          	echo $_SESSION['blad'];
-          ?>
-
+          
+          </div>
+        </div>
+          
           <br>
           <br>
 </body>

@@ -1,203 +1,101 @@
-a {
-  color: inherit!important;
+h1 {
+    margin-top: 0;
+}
+html{
+  background-color:  #f2f2f2;
+}
+body{
+  margin: 0; // 1
+  font-family: $font-family-base;
+  font-size: $font-size-base;
+  font-weight: $font-weight-base;
+  line-height: $line-height-base;
+  color: $body-color;
+  text-align: left; // 3
+  background-color:  #f2f2f2;
+}
+#error{
+  display: none;
 }
 
-a i {
-  color: gray !important;
+.main-true{
+  background:  #f2f2f2;
+  width: auto;
+  height:1300px;
+  margin: 0px;
+  padding: 0px;
+}
+.register_container{
+  padding-top: 10px;
+  margin: 0 auto;
+  width: 420px;
+  max-width: 100%;
+  margin-top: 50px;
+}
+.login_container{
+  padding-top: 10px;
+  margin: 0 auto;
+  width: 420px;
+  max-width: 100%;
+  margin-top: 50px;
 }
 
-.menu a {
-  color:#16a085!important;
+.btn_width{
+  width: 100%;
+  width: 420px;
+  max-width: 100%;
+  margin: 30px 0;
+  
+}
+.space{
+  position: relative;
+  margin-bottom: 10px;
+  margin-top: 10px;
+
+}
+
+
+.active{
+  display: none!important;
+}
+#btn1{
+  width: 210px;
+  background-color: white;
+  border: none;
+}
+#btn2{
+  width: 205px;
+  background-color: white;
+  border: none;
+}
+.active_tab{
+  border-bottom: 1px solid #005fb3;
+}
+.main_container{
+    width: 940px;
+    max-width: 90%;
+    margin: 116px auto 160px;
+    background-color: #fff;
+    position: relative;
+    box-shadow: 0 0 8px 0 rgba(0,0,0,.1)
+}
+.fluid_container{
+    width: 100%;
+    max-width: 1709px;
+    padding-right: 16px;
+    padding-left: 16px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+
+.fa-thumbs-down, .fa-thumbs-o-down {
+  transform:rotateY(180deg);
 }
 .error{
-  color: red!important;
-}
-
-.menu .nav-link{
- padding-right: 0px!important;
-}
-a:hover{
-  color:blue;
-}
-
-img{
-  width: 100%;
-}
-
-.main {
-  background-image: url(images/1.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
-  min-height: 500px;
-}
-
-.main i {
-  color: #f1c40f!important;
-}
-
-.main .jumbotron, .second .jumbotron, .six .jumbotron{
-  background-color: transparent!important;
-}
-
-.text {
-  background-color: rgba(44, 62, 80, 0.8);
-  color: white;
-}
-
-.main .text{
-  width: 50%;
-  border: 1px solid #7f8c8d;
-}
-
-.modal{
-  color:gray!important;
-}
-label{
-  float: left;
-}
-
-.third .col-lg-3 {
-  margin-top: -30px;
-  padding-right: 0!important;
- padding-left: 0 !important;
-}
-
-.third img{
-  opacity: 0.7;
-}
-
-.local {
-  background-image: url(images/8.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
-  min-height: 500px;
-}
-
-.local2 {
-  background-image: url(images/9.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
-  min-height: 500px;
-}
-
-.four.jumbotron{
-padding: 0!important
-}
-
-.four .text1{
-  padding: 3%;
-}
-
-.second {
-  background-image: url(images/houses.png);
-  background-size: cover;
-  background-repeat: no-repeat;
-  min-height: 400px;
-  margin-top: -30px;
-  color: white;
-}
-
-.six {
-  background-image: url(images/10.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
-  min-height: 300px;
-  color: white;
-}
-
-.six .col-12{
-  margin-left: 8%;
-}
-
-.five h3, .how h3, .how h4, .how h5, .steps h3{
-  color: #4a9375!important;
-}
-
-.how .jumbotron{
-  background-color: #fdf9f8!important;
-}
-
-.how {
-  background-color: transparent!important;
-}
-
-.steps {
- background-image: url(images/steps/center.png);
- height: 1178px;
- background-size:cover;
- background-repeat: no-repeat;
-}
-
-.map{
-  background-image: url(images/map.png);
-  min-height: 1000px;
-  background-size:cover;
-  background-repeat: no-repeat;
-}
-.name {
-  padding: 1%;
-  background-color: rgba(70, 140, 104, 0.5);
-  color: white;
+  width: 940px;
+  vertical-align: middle;
+  margin: 0 auto;
   text-align: center;
 }
-.map .card{
-  background-color: rgba(0,0,0, 0.0) !important;
-}
 
-.seven.row .col-lg-3{
-  padding:0!important;
-}
-.seven .jumbotron{
-  background-color: transparent!important;.seven .row
-}
-.form-inline label{
-  padding: 2%;
-}
-
-.form-inline button {
-  margin: 10px;;
-}
-
-.five .col-lg-6{
-  padding-right: 0!important;
-   padding-left: 0!important;
-}
-
-.how {
-  background-image: url(images/19.jpeg);
-  background-position: center;
-  min-height: 400px;
-  background-repeat: no-repeat;
-}
-
-.about_place{
-  background-color: rgba(235, 236, 238, 0.9);
-  padding: 5%;
-  text-align: justify;
-  font-size: 14px;
-  color:black;
-}
-
-.subsribe{
-  background-image: url(images/end.jpg);
-  background-position: cover;
-  min-height: 300px;
-  background-repeat: no-repeat;
-  color: white;
-}
-
-.subsribe button{
-  background-color: #efb50b;
-  color: white;
-}
-
-.subsribe .input-group.mb-3{
-  width:50%;
-}
-
-
-@media only screen and (max-width: 1000px){
-  .steps {
-    display: none;
-  }
-}

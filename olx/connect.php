@@ -7,7 +7,7 @@
    $db_name = "olx";
 
 
-   	$conn =mysqli_connect($host, $db_user, $db_password, $db_name);
+   	$conn = mysqli_connect($host, $db_user, $db_password, $db_name);
 	//$select = @mysql_select_db ($db_name, $conn);
 
 if ($conn->connect_errno!=0) {
