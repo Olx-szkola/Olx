@@ -58,18 +58,18 @@ body{
 .active{
   display: none!important;
 }
-#btn1{
+.btn1{
   width: 210px;
-  background-color: white;
-  border: none;
+  color: #212529;
+  background-color: #fff;
 }
-#btn2{
+.btn2{
   width: 205px;
-  background-color: white;
-  border: none;
+  color: #212529;
+  background-color: #fff;
 }
 .active_tab{
-  border-bottom: 1px solid #005fb3;
+  border-bottom: 1px solid #005fb3!important;
 }
 .main_container{
     width: 940px;
@@ -78,6 +78,10 @@ body{
     background-color: #fff;
     position: relative;
     box-shadow: 0 0 8px 0 rgba(0,0,0,.1)
+}
+.logo{
+  height: 200px;
+  width: 150px;
 }
 .fluid_container{
     width: 100%;
@@ -98,4 +102,8 @@ body{
   margin: 0 auto;
   text-align: center;
 }
+.b1{background-color: #fff;}
+.b2{background-color: #fff;}
+.b3{background-color: #fff;}
+.b4{background-color: #fff;}
 

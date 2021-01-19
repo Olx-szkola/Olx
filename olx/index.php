@@ -23,9 +23,9 @@ if((isset($_SESSION['zalogowany'])) && ($_SESSION['zalogowany']==true))
           <div class="main_container">
           <div class="login_container">
           
-          
-          <button id="btn1" name="btn1" onclick="przejdz();" class="btn btn-light">Logowanie</button>
-          <button name="btn2" id="btn2" onclick="przejdz1();" class="btn btn-light">Nowe konto</button>
+          <img src="uploads/TYP.IE.PNG" class="logo">
+          <button id="btn1" name="btn1" onclick="przejdz();" class="b1 btn btn1 active_tab">Logowanie</button>
+          <button name="btn2" id="btn2" onclick="przejdz1();" class="b2 btn btn2">Nowe konto</button>
           <div class="form-group">
           <form action="zaloguj.php" method="post">
           
@@ -48,19 +48,28 @@ if((isset($_SESSION['zalogowany'])) && ($_SESSION['zalogowany']==true))
         function przejdz(){
         var element1 = document.getElementById("blok1");
         var element2 = document.getElementById("block2");
+        var element3 = document.getElementsByClassName("b2")[0];
+        var element4 = document.getElementsByClassName("b1")[0];
         if(document.getElementById("btn2").value == 0)
         {
           element1.classList.add("active");
           element2.classList.remove("active");
+          element3.classList.remove("active_tab");
+          element4.classList.add("active_tab");
+
         }
       }
         function przejdz1(){
         var element1 = document.getElementById("blok1");
         var element2 = document.getElementById("block2");
+        var element3 = document.getElementsByClassName("b3")[0];
+        var element4 = document.getElementsByClassName("b4")[0];
         if(document.getElementById("btn1").value == 0)
         {
           element2.classList.add("active");
           element1.classList.remove("active");
+          element3.classList.remove("active_tab");
+          element4.classList.add("active_tab");
         }
       
         }
@@ -91,8 +100,8 @@ if((isset($_SESSION['zalogowany'])) && ($_SESSION['zalogowany']==true))
         <div class="form-group">
         
         <div class="register_container">
-        <button id="btn1" name="btn1" onclick="przejdz()" class="btn btn-light">Logowanie</button>
-        <button name="btn2" id="btn2" onclick="przejdz1()" class="btn btn-light">Nowe konto</button>
+        <button id="btn1" name="btn1" onclick="przejdz()" class="b3 btn btn1">Logowanie</button>
+        <button name="btn2" id="btn2" onclick="przejdz1()" class="b4 btn btn2">Nowe konto</button>
         <form action="rejestracja.php"  method="post">    
         <div class="space">    				
        	<input type="text" class="form-control"  aria-describedby="emailHelp" placeholder="Wpisz login" name="login-r" id="sprawdzmail">
