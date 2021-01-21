@@ -1,170 +1,78 @@
 <?php
 session_start();
-if((isset($_SESSION['zalogowany'])) && ($_SESSION['zalogowany']==true))
-	{
-		header('location: ogloszenia.php');
-		exit();
-	}
 ?>
 <!DOCTYPE html>
 <html>
   <head>
     <?php include('html_includes/header.php'); ?>
   </head>
-  <body>
+  <body style="background color:  #f2f2f2;">
+    <form>
+    <div class="header">
+    <div class="header_prefluid">
+    <div class="header_fluid">
 
-      	<div class="main-true">
-        
-        
-        
-        <div class="fluid_container">
-        <div id="block2" class="">
+    <a href="index.php"><img class="header_logo" src="uploads/logo2.png"></a>
 
-          <div class="main_container">
-          <div class="login_container">
-          
-          <img src="uploads/TYP.IE.PNG" class="logo">
-          <button id="btn1" name="btn1" onclick="przejdz();" class="b1 btn btn1 active_tab">Logowanie</button>
-          <button name="btn2" id="btn2" onclick="przejdz1();" class="b2 btn btn2">Nowe konto</button>
-          <div class="form-group">
-          <form action="zaloguj.php" method="post">
-          
-          
-          </div>
+    <input class="form-control me-2 search_bar" type="search" placeholder="szukaj: np: tynkarz" aria-label="Search" autocomplete="off">
+    <button class="btn btn-primary btn_color search_btn"><i class="fas fa-search"></i></button>
+    </form>
 
-          <div class="space">
-          <input type="text" class="form-control" id="login" aria-describedby="emailHelp" placeholder="Wpisz login" name="login" id="sprawdzmail">
-          </div>
-          <div class="space">
-          <input type="password" class="form-control" id="haslo" placeholder="Hasło" name="haslo">
-          </div>
+    <a class="a_box " href="log_rej.php">
+    <i class="far fa-user icon"></i>
+    <span class="h_span">Zaloguj się <br> Załóż konto</span></a>
+    <?php
 
-      	 <input class="btn btn-primary btn_width" type="submit" id="submit" name="name" value="Zaloguj się">
-         
-        </form>
+      if((isset($_SESSION['zalogowany'])) && ($_SESSION['zalogowany']==true))
+         {
+           echo "<a class='a_box_ad' href='ogloszenia.php'><i class='far fa-address-card icon_ad'></i>&nbsp;Twoje ogłoszenia</a>";
+           echo "<a class='a_box_logout' href='logout.php'><i class='fas fa-sign-out-alt icon_logout'></i>&nbsp;Wyloguj</a>";
 
-        <script type="text/javascript">
+         }
 
-        function przejdz(){
-        var element1 = document.getElementById("blok1");
-        var element2 = document.getElementById("block2");
-        var element3 = document.getElementsByClassName("b2")[0];
-        var element4 = document.getElementsByClassName("b1")[0];
-        if(document.getElementById("btn2").value == 0)
+    ?>
+    </div>
+    </div>
+    </div>
+    <div class="filtr_container"><h1>Filtry tutaj dodaj filtry razem z przyciskiem mozesz zrobić check boxy  z ikonkami z awesome font biblioteka wgrana btw. Zmien tekst z najnowszych postów na najnowsze(checkbox zawodu)</h1></div>
+    <div class="h1_fluid"><h1>Najnowsze ogłoszenia</h1></div>
+    <?php
+    require_once('like/show.php');
+    foreach($view as $post): ?>
+    
+    <div class="new_ad_box"><img class="ad_img" src='<?php echo $post['photo']?>'>
+    <br><div class="ad_text"><strong>Wystawiający:&nbsp;<?php echo $post['owner'] ?></strong></div>
+    <br><div class="ad_text"><strong>Data dodania:&nbsp;<?php echo $post['data'] ?></strong></div>
+    <br><div class="ad_text"><strong>Rodzaj działalności:&nbsp;<?php echo $post['type']?></strong></div>
+    <div  class="collapsible"><i class="fas fa-chevron-down icon_col"></i></div>
+    <div id="index" class="content"><p>Opis:</p><?php echo $post['survey']?></div>
+    </div>
+    
+    <?php endforeach; ?>
+    <script src="colapse.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+      var element1 = document.getElementsByClassName("collapsible")[0];
+      var element2 = document.getElementsByClassName("fas")[0];
+      function zmien(){
+        if(document.getElementById("collapsible").value == 0)
         {
-          element1.classList.add("active");
-          element2.classList.remove("active");
-          element3.classList.remove("active_tab");
-          element4.classList.add("active_tab");
-
+          element2.classList.remove("fa-chevron-down");
+          element2.classList.add("fa-chevron-up");
+        }
+        else
+        {
+          element2.classList.remove("fa-chevron-up");
+          element2.classList.add("fa-chevron-up");
         }
       }
-        function przejdz1(){
-        var element1 = document.getElementById("blok1");
-        var element2 = document.getElementById("block2");
-        var element3 = document.getElementsByClassName("b3")[0];
-        var element4 = document.getElementsByClassName("b4")[0];
-        if(document.getElementById("btn1").value == 0)
-        {
-          element2.classList.add("active");
-          element1.classList.remove("active");
-          element3.classList.remove("active_tab");
-          element4.classList.add("active_tab");
-        }
-      
-        }
-        </script>
-        </div>
-        </div>
-        <?php
-          if(isset($_SESSION['blad']))
-          {
-            echo $_SESSION['blad'];
-          }
-          unset($_SESSION['blad']);
-          ?>
-          <div id="ee"></div>
-    </div>
 
+    </script>
 
-    
-
-
-
+  </body>
+  </html>
+  
         
-        <div class="fluid_container">
-        <div id="blok1" class="active">
-
-        <div class="main_container">
-
-        <div class="form-group">
         
-        <div class="register_container">
-        <button id="btn1" name="btn1" onclick="przejdz()" class="b3 btn btn1">Logowanie</button>
-        <button name="btn2" id="btn2" onclick="przejdz1()" class="b4 btn btn2">Nowe konto</button>
-        <form action="rejestracja.php"  method="post">    
-        <div class="space">    				
-       	<input type="text" class="form-control"  aria-describedby="emailHelp" placeholder="Wpisz login" name="login-r" id="sprawdzmail">
         
-        </div>
-     <?php
-
-     if(isset($_SESSION['error-log']))
-     {
-     	echo '<div id="error" class="alert alert-danger" role="alert">'.$_SESSION['error-log'].'</div>';
-       	unset($_SESSION['error-log']);
-     }
-     ?>
-     
-      
-      <div class="space">
-     	<input type="password" class="form-control"  aria-describedby="emailHelp" placeholder="Wpisz hasło" name="haslo-r" id="sprawdzmail">
-     	</div>
-      <?php
-
-     	if(isset($_SESSION['error-haslo']))
-       	{
-       	echo '<div class="error">'.$_SESSION['error-haslo'].'</div>';
-       	unset($_SESSION['error-haslo']);
-       	}
-
-     	?>
-      <div class="space">
-     	<input type="password" class="form-control"  aria-describedby="emailHelp" placeholder="Powtórz hasło" name="haslo-r2" id="sprawdzmail">
-      </div>
-      <div class="space">
-      <input type="text" class="form-control"  aria-describedby="emailHelp" placeholder="Wpisz email" name="email-r" id="sprawdzmail">
-      </div>     
-     <?php
-
-     if(isset($_SESSION['error-email']))
-       {
-       	echo '<div class="error">'.$_SESSION['error-email'].'</div>';
-       	unset($_SESSION['error-email']);
-       	}
-
-     ?>
-       <br>
-      	<div class="space">
-      	<input class="btn btn-primary btn_width" type="submit" class="name" value="Przejdz dalej">
-      	 </div>
-         <?php
-
-	     if(isset($_SESSION['pass']))
-	       {
-	       	echo '<div class="error">'.$_SESSION['pass'].'</div>';
-	       	unset($_SESSION['pass']);
-	       	}
-
-     	?>	
-          </form>
-        </div>
-          
-          
-          </div>
-        </div>
-          
-          <br>
-          <br>
-</body>
-</html>
+  

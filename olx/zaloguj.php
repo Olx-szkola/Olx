@@ -2,7 +2,7 @@
   session_start();
   if ((!isset($_POST['login'])) || (!isset($_POST['haslo']))) 
   {
-  	header('Location: index.php');
+  	header('Location: log_rej.php');
   	exit();
   }
   require_once "connect.php";
@@ -42,7 +42,7 @@
   		{
   			$_SESSION['blad'] = "<div class='alert alert-danger error' role='alert'>
          Błąd niepoprawny login lub hasło!</div>";
-  			header('location:index.php');
+  			header('location:log_rej.php');
 
   		}
 

@@ -12,14 +12,14 @@ session_start();
 	if((strlen($loginr)<3) || (strlen($loginr)>20))
 	{
 		$flaga=false;
-		$_SESSION['error-log']="Twój login musi posiadać od 3 do 20 znaków";
-		header('location:index.php');
+		$_SESSION['error-log']="<div id='error' class='alert alert-danger' role='alert'>Twój login musi posiadać od 3 do 20 znaków</div>";
+		header('location:log_rej.php');
 	}
 	if(ctype_alnum($loginr)==false)
 	{
 		$flaga=false;
-		$_SESSION['error-log']="Login nie może składać się z polskich znaków";
-		header('location:index.php');
+		$_SESSION['error-log']="<div id='error' class='alert alert-danger' role='alert'>Login nie może składać się z polskich znaków</div>";
+		header('location:log_rej.php');
 		
 	}
 
@@ -29,7 +29,7 @@ session_start();
 	if((filter_var($email_san, FILTER_VALIDATE_EMAIL)==false) || ($email_san!=$emailr))
 	{
 		$flaga=false;
-		$_SESSION['error-email']="Podaj poprawny adres email";
+		$_SESSION['error-email']="<div id='error' class='alert alert-danger' role='alert'>Podaj poprawny adres email</div>";
 	}
 
 		$haslo1=$_POST['haslo-r'];
@@ -38,14 +38,14 @@ session_start();
 	if((strlen($haslo1)<8) || (strlen($haslo1)>20))
 	{
 		$flaga=false;
-		$_SESSION['error-haslo']="Haslo musi posiadać od 8 do 20 znaków";
-		header('location:index.php');
+		$_SESSION['error-haslo']="<div id='error' class='alert alert-danger' role='alert'>Haslo musi posiadać od 8 do 20 znaków</div>";
+		header('location:log_rej.php');
 	}
 	if($haslo1!=$haslo2)
 	{
 		$flaga=false;
-		$_SESSION['error-haslo']="Haslo rózni się od pierwotnego!";
-		header('location:index.php');
+		$_SESSION['error-haslo']="<div id='error' class='alert alert-danger' role='alert'>Haslo rózni się od pierwotnego!</div>";
+		header('location:log_rej.php');
 	}
 
 	require_once "connect.php";
@@ -67,8 +67,8 @@ session_start();
 			if($ile>0)
 			{
 				$flaga=false;
-				$_SESSION['error-email']="Istnieje juz konto przypisane do takiego konta email";
-				header('location:index.php');
+				$_SESSION['error-email']="<div id='error' class='alert alert-danger' role='alert'>Istnieje juz konto przypisane do takiego konta email</div>";
+				header('location:log_rej.php');
 			}
 
 			$rezultat = $polaczenie->query("SELECT id FROM users WHERE login = '$loginr'");
@@ -78,15 +78,15 @@ session_start();
 			if($ile_login>0)
 			{
 				$flaga=false;
-				$_SESSION['error-log']="Istnieje juz konto z takim loginem";
-				header('location:index.php');
+				$_SESSION['error-log']="<div id='error' class='alert alert-danger' role='alert'>Istnieje juz konto z takim loginem</div>";
+				header('location:log_rej.php');
 			}
 			if($flaga==true)
 			{
 				if($polaczenie->query("INSERT INTO users(`id`, `login`, `haslo`, `email`,`admin`) VALUES ('', '$loginr', '$haslo1', '$emailr', '$haslo2' )"))
 				{
-				$_SESSION['pass']="Udało ci się zarejestrować. Może się teraz zalogować!";
-				header('location:index.php');
+				$_SESSION['pass']="<div class='alert alert-success' role='alert'>Udało ci się zarejestrować. Może się teraz zalogować!</div>";
+				header('location:log_rej.php');
 				}
 				else
 				{
