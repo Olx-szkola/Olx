@@ -13,8 +13,8 @@ session_start();
 	if($emailz1!=$emailz2)
 	{
 		$flaga=false;
-		$_SESSION['error-email']="Email rózni się od pierwotnego!";
-		header('location:zmienemail.php');
+		$_SESSION['error-email']="<div id='error' class='alert alert-danger' role='alert'>Email rózni się od pierwotnego!</div>";
+		header('location:zmien_dane.php');
 	}
 	
 	$email_san = filter_var($emailz1,FILTER_SANITIZE_EMAIL);
@@ -22,8 +22,8 @@ session_start();
 	if((filter_var($email_san, FILTER_VALIDATE_EMAIL)==false) || ($email_san!=$emailz1))
 	{
 		$flaga=false;
-		$_SESSION['error-email']="Podaj poprawny adres email";
-		header('location:zmienemail.php');
+		$_SESSION['error-email']="<div id='error' class='alert alert-danger' role='alert'>Podaj poprawny adres email</div>";
+		header('location:zmien_dane.php');
 	}
 	
 	require_once "connect.php";
@@ -42,8 +42,8 @@ session_start();
 			{
 				if($polaczenie->query("UPDATE users SET `email`='$emailz1' WHERE `id`='$id'"))
 				{
-				$_SESSION['pass']="Udało ci się zmienić e-mail!";
-				header('location:zmienemail.php');
+				$_SESSION['pass']="<div class='alert alert-success' role='alert'>Udało ci się zmienić e-mail!</div>";
+				header('location:zmien_dane.php');
 				}
 				else
 				{

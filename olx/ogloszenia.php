@@ -28,7 +28,7 @@ if(isset($_SESSION['zalogowany']))
     <input class="form-control me-2 search_bar" type="search" placeholder="szukaj: np: tynkarz" aria-label="Search" autocomplete="off" disabled>
     <button class="btn btn-primary btn_color search_btn"><i class="fas fa-search"></i></button>
     </form>
-    <a class="a_box " href="log_rej.php">
+    <a class="a_box " href="zmien_dane.php">
     <i class="far fa-user icon"></i>
     <span class="">Zmień dane <br> logowania</span></a>
     <?php
@@ -70,11 +70,12 @@ if(isset($_SESSION['zalogowany']))
         <option value="Murarz">Murarz</option>
         <option value="Tynkarz">Tynkarz</option>
         <option value="Płytkarz">Płytkarz</option>
-        <option value="cieśla">Cieśla</option>
-        <option value="akrobata">akrobata</option>
+        <option value="Cieśla">Cieśla</option>
+        <option value="Akrobata">akrobata</option>
     </select>
     <button type="submit" name="send" class="btn btn-outline-success btn_float" id="btn_submit">Wyślij</button>
     </div>
+	</form>
     <script type="text/javascript">
       function check(){
       var check = document.getElementById("survey").value;
@@ -103,8 +104,11 @@ if(isset($_SESSION['zalogowany']))
     <br><div class="ad_text"><strong>Wystawiający:&nbsp;<?php echo $post['owner'] ?></strong></div>
     <br><div class="ad_text"><strong>Data dodania:&nbsp;<?php echo $post['data'] ?></strong></div>
     <br><div class="ad_text"><strong>Rodzaj działalności:&nbsp;<?php echo $post['type']?></strong></div>
-    <button class="btn btn-outline-success btn_up ad_text" id="btn_show">Zmień dane posta</button>
-    <div  class="collapsible"><i class="fas fa-chevron-down icon_col"></i></div>
+	<form method="post" action="edytuj_ogloszenie.php">
+	<input type="hidden" name="id_posta" value="<?php echo $post['id'] ?>">
+    <button type="submit" class="btn btn-outline-success btn_up ad_text" id="btn_show">Zmień dane posta</button>
+    </form>
+	<div  class="collapsible"><i class="fas fa-chevron-down icon_col"></i></div>
     <div id="index" class="content"><p>Opis:</p><?php echo $post['survey']?></div>
 
     </div>

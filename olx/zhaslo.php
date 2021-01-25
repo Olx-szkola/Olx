@@ -12,16 +12,16 @@ session_start();
 	if((strlen($hasloz1)<8) || (strlen($hasloz1)>20))
 	{
 		$flaga=false;
-		$_SESSION['error-haslo']="Haslo musi posiadać od 8 do 20 znaków";
-		header('location:zmienhaslo.php');
+		$_SESSION['error-haslo']="<div id='error' class='alert alert-danger' role='alert'>Haslo musi posiadać od 8 do 20 znaków</div>";
+		header('location:zmien_dane.php');
 	}
 	
 	
 	if($hasloz1!=$hasloz2)
 	{
 		$flaga=false;
-		$_SESSION['error-haslo']="Haslo rózni się od pierwotnego!";
-		header('location:zmienhaslo.php');
+		$_SESSION['error-haslo']="<div id='error' class='alert alert-danger' role='alert'>Haslo rózni się od pierwotnego!</div>";
+		header('location:zmien_dane.php');
 	}
 	
 	require_once "connect.php";
@@ -40,8 +40,8 @@ session_start();
 			{
 				if($polaczenie->query("UPDATE users SET `haslo`='$hasloz1' WHERE `id`='$id'"))
 				{
-				$_SESSION['pass']="Udało ci się zmienić hasło!";
-				header('location:zmienhaslo.php');
+				$_SESSION['pass']="<div class='alert alert-success' role='alert'>Udało ci się zmienić hasło!</div>";
+				header('location:zmien_dane.php');
 				}
 				else
 				{

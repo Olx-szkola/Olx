@@ -5,7 +5,7 @@
 
         $owner = $_SESSION['login'];
 
-        $view=$conn->query("SELECT * FROM POSTS WHERE OWNER = '$owner'");
+        $view=$conn->query("SELECT * FROM POSTS WHERE OWNER = '$owner' ORDER BY data DESC");
         $user_id=$conn->query("SELECT id FROM users WHERE login = '$owner'");
         
  		
