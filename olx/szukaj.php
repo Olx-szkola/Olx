@@ -51,7 +51,7 @@ require_once('connect.php');
   </head>
   <body style="background color:  #f2f2f2;">
     <form action="szukaj_nazwa.php" method="post">
-    <div class="header">
+    <div class="header" id="headerSticky">
     <div class="header_prefluid">
     <div class="header_fluid">
 
@@ -120,6 +120,21 @@ require_once('connect.php');
       }
 
     </script>
+	
+	<script type="text/javascript">
+	window.onscroll = function() {myFunction()};
+	
+	var header = document.getElementById("headerSticky");
+	var sticky = header.offsetTop;
+	
+	function myFunction() {
+		if (window.pageYOffset > sticky) {
+			header.classList.add("sticky");
+		} else {
+			header.classList.remove("sticky");
+		}
+	}
+	</script>
 
   </body>
   </html>

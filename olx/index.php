@@ -5,13 +5,16 @@ session_start();
 <html>
   <head>
     <?php include('html_includes/header.php'); ?>
+	
   </head>
   <body style="background color:  #f2f2f2;">
-    <form action="szukaj_nazwa.php" method="post">
-    <div class="header">
+  
+    <div class="header" id="headerSticky">
     <div class="header_prefluid">
     <div class="header_fluid">
-
+	
+	<form action="szukaj_nazwa.php" method="post">
+	
     <a href="index.php"><img class="header_logo" src="uploads/logo2.png"></a>
 
     <input class="form-control me-2 search_bar" type="search" placeholder="szukaj: np: tynkarz" name="wyszukaj" aria-label="Search">
@@ -34,7 +37,8 @@ session_start();
     </div>
     </div>
     </div>
-    <div class="filtr_container"><form action="szukaj.php" method="post"><h3 style="margin-left: 30px">
+	
+    <div class="filtr_container" ><form action="szukaj.php" method="post"><h3 style="margin-left: 30px">
     <br><strong><label class="container">&nbsp; Murarz<input type='checkbox' name="select_murarz" value="murarz"/><span class="checkmark"></span></label></strong>
     <strong><label class="container">&nbsp; Tynkarz<input type='checkbox' name="select_tynkarz" value="tynkarz"/><span class="checkmark"></span></label></strong>
     <strong><label class="container">&nbsp; Płytkarz<input type='checkbox' name="select_płytkarz" value="płytkarz"/><span class="checkmark"></span></label></strong>
@@ -78,6 +82,23 @@ session_start();
       }
 
     </script>
+	
+	<script type="text/javascript">
+	window.onscroll = function() {myFunction()};
+	
+	var header = document.getElementById("headerSticky");
+	var sticky = header.offsetTop;
+	
+	function myFunction() {
+		if (window.pageYOffset > sticky) {
+			header.classList.add("sticky");
+		} else {
+			header.classList.remove("sticky");
+		}
+	}
+	</script>
+	
+
 
   </body>
   </html>
