@@ -483,3 +483,19 @@ margin-top: -16%;
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
+.bot {
+  display: block;
+  height: 300px;
+  width: 100%;
+}
+.p_active{
+  color: white!important;
+  background-color: green!important;
+}
+
+
+.pagin {
+  margin-right: -20px;
+  margin-top: 30px;
+}
+
