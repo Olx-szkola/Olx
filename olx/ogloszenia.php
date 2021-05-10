@@ -16,29 +16,49 @@ if(isset($_SESSION['zalogowany']))
 <html>
   <head>
     <?php include('html_includes/header.php'); ?>
+	
   </head>
   <body style="background color:  #f2f2f2;">
-    <form>
+    
     <div class="header" id="headerSticky">
     <div class="header_prefluid">
     <div class="header_fluid">
 
     <a href="index.php"><img class="header_logo" src="uploads/logo2.png"></a>
-
+	<form>
     <input class="form-control me-2 search_bar" type="search" placeholder="szukaj: np: tynkarz" aria-label="Search" autocomplete="off" disabled>
     <button class="btn btn-primary btn_color search_btn"><i class="fas fa-search"></i></button>
     </form>
-    <a class="a_box " href="zmien_dane.php">
-    <i class="far fa-user icon"></i>
-    <span class="">Zmień dane <br> logowania</span></a>
-    <?php
+	
+	<div class="dropdown">
+	<button onclick="dropdownList()" class="dropbutton">Twoje konto<br></button>
+	<div id="myDropdown" class="dropdown-content">
+	<a href="zmien_dane.php">Zmień dane logowania</a>
+    <a href="logout.php">Wyloguj się</a>
+	
+	<script type="text/javascript">
+	function dropdownList() {
+	document.getElementById("myDropdown").classList.toggle("show");
+	}
 
-      if((isset($_SESSION['zalogowany'])) && ($_SESSION['zalogowany']==true))
-         {
-           echo "<a class='a_box_logout' href='logout.php'><i class='fas fa-sign-out-alt icon_logout'></i>&nbsp;Wyloguj</a>";
-         }
-
-    ?>
+	
+	window.onclick = function(event) {
+	if (!event.target.matches('.dropbutton')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+		}
+		}
+		}
+	}
+	
+	</script>
+	
+	</div>
+	</div>
     </div>
     </div>
     </div>
