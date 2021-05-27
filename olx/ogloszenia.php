@@ -54,7 +54,12 @@ if(isset($_SESSION['zalogowany']))
 		}
 		}
 	}
-	
+	function count()
+  {
+    var total=document.getElementById("survey").value;
+    total=total.replace(/\s/g, '');
+    document.getElementById("total").innerHTML="Znaki: "+total.length+"/9000";
+  }
 	</script>
 	
 	</div>
@@ -62,18 +67,28 @@ if(isset($_SESSION['zalogowany']))
     </div>
     </div>
     </div>
-    <div class="h1_fluid"><h1>Dodaj nowe ogłoszenie</h1></div>
-    <div class="add_ad">
     <form action="posts/add_posts.php" method="POST" enctype="multipart/form-data">
+    <div class="h1_fluid"><h1>Dodaj nowe ogłoszenie</h1></div>
+    <div class="add-ad-title">
+      <strong><label for="survey" class="add_font">Dodaj Tytuł</label></strong>
+      <br>
+      <label  class="">Dodaj tytuł<span style="color:red">*</span></label>
+      <div class="form-floating mb-3">
+      <input type="text" class="form-control" id="title" name="title" placeholder="Tytuł">
+     <label for="floatingInput">Tytuł:</label>
+    </div>
+    </div>
+    <div class="add_ad">
     <br/>
     <strong><label for="survey" class="add_font">Opis usługi</label></strong>
     <br>
     <label for="survey" class="">Opis usługi<span style="color:red">*</span></label>
     </br>
     <div class="form-floating">
-    <textarea onchange="check();" class="form-control"class="name" name="survey" cols="70%" rows="3" id="survey"></textarea>
+    <textarea oninput="check();" onkeyup="count();" class="form-control" class="name" name="survey" cols="70%" rows="3" id="survey"></textarea>
     <label for="floatingTextarea">Opis:</label>
     </div>
+    <p id="total">Znaki: 0/9000</p>
     </div>
     <div class="add_ad2">
     <strong><label for="survey" class="add_font">Rodzaj usługi i zdjęcie</label></strong>
@@ -100,9 +115,10 @@ if(isset($_SESSION['zalogowany']))
       function check(){
       var check = document.getElementById("survey").value;
       var area = document.getElementById("survey");
-      var long = check.length;
+      var long = document.getElementById("survey").value;
+      long = long.replace(/\s/g, '');
       var btn = document.getElementById("btn_submit");
-      if(long>9000)
+      if(long.length>9000)
       {
         btn.setAttribute("disabled", true);
         area.classList.add("is-invalid");
@@ -121,6 +137,7 @@ if(isset($_SESSION['zalogowany']))
     foreach($view as $post): ?>
     
     <div class="new_ad_box"><img class="ad_img" src='<?php echo $post['photo']?>'>
+    <div class="title-box">
     <br><div class="ad_text"><strong>Wystawiający:&nbsp;<?php echo $post['owner'] ?></strong></div>
     <br><div class="ad_text"><strong>Data dodania:&nbsp;<?php echo $post['data'] ?></strong></div>
     <br><div class="ad_text"><strong>Rodzaj działalności:&nbsp;<?php echo $post['type']?></strong></div>

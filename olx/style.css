@@ -384,6 +384,19 @@ margin-top: -16%;
   z-index: auto;
   position: relative;
 }
+.add-ad-title
+{
+  display: block;
+  background-color: #fff;
+  width: 1200px;
+  height: 160px;
+  margin: 40px 0px 0px 500px;
+  position: relative;
+  box-shadow: 0 0 8px 0 rgba(0,0,0,.1);
+  padding: 20px 20px 20px 40px;
+  z-index: auto;
+  position: relative;
+}
 .add_font{
   font-size: 20;
 }
@@ -555,4 +568,7 @@ margin-top: -16%;
 
 /* pojaż listę rozwijaną JS */
 .show {display: block;}
+.pagin-margin{
+      margin: 40px 0px 0px 1580px;
+}
 

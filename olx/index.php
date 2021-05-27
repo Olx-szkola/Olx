@@ -135,7 +135,7 @@ session_start();
 <div class="bot">
 <div class="pagin">
 <nav aria-label="Page navigation example">
-  <ul class="pagination">
+  <ul class="pagination pagin-margin">
     <li class="page-item">
     
 <?php
@@ -160,7 +160,7 @@ else
 }
 
 for ($page_spr=1; $page_spr<=$number_of_pages; $page_spr++) {
-    echo ' <li class="page-item"><a class="page-link"  id='.$page_spr .' href="index.php?page='  . $page_spr .  '">' . $page_spr . '</a></li>'; }   
+    echo ' <li class="page-item "><a class="page-link"  id='.$page_spr .' href="index.php?page='  . $page_spr .  '">' . $page_spr . '</a></li>'; }   
 
 
 echo '<a class="page-link"  href="index.php?page='  . $page_dod .  '" aria-label="Next">
