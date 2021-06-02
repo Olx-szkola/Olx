@@ -1,10 +1,4 @@
-a {
-  color: inherit!important;
-}
 
-a i {
-  color: gray !important;
-}
 
 .menu a {
   color:#16a085!important;
@@ -15,9 +9,6 @@ a i {
 
 .menu .nav-link{
  padding-right: 0px!important;
-}
-a:hover{
-  color:blue;
 }
 
 img{

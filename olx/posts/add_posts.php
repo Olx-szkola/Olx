@@ -2,7 +2,7 @@
 session_start();
 require_once('../connect.php');
 mysqli_report(MYSQLI_REPORT_STRICT);
-
+$title=$_POST['title'];
 $survey=$_POST['survey'];
 $type=$_POST['type'];
 $owner=$_SESSION['login'];
@@ -14,8 +14,9 @@ $data=date("Y-m-d");
 move_uploaded_file($photo['tmp_name'], '../uploads/'.$photo['name']);
 $path = 'uploads/'.$photo['name'];
 
-$add=$conn->query("INSERT INTO posts(`owner`, `data`, `type`, `survey`, `photo`)
-VALUES ('$owner','$data','$type','$survey','$path')");
+$add=$conn->query("INSERT INTO posts(`owner`, `data`, `type`, `survey`, `photo`, `title`)
+VALUES ('$owner','$data','$type','$survey','$path','$title')");
+
 
 if($add){
 	$_SESSION['win']="Twoje ogłoszenie zostało dodane.";

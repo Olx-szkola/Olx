@@ -384,6 +384,19 @@ margin-top: -16%;
   z-index: auto;
   position: relative;
 }
+.add-ad-title
+{
+  display: block;
+  background-color: #fff;
+  width: 1200px;
+  height: 160px;
+  margin: 40px 0px 0px 500px;
+  position: relative;
+  box-shadow: 0 0 8px 0 rgba(0,0,0,.1);
+  padding: 20px 20px 20px 40px;
+  z-index: auto;
+  position: relative;
+}
 .add_font{
   font-size: 20;
 }
@@ -483,3 +496,79 @@ margin-top: -16%;
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
+.bot {
+  display: block;
+  height: 300px;
+  width: 100%;
+}
+.p_active{
+  color: white!important;
+  background-color: green!important;
+}
+
+
+.pagin {
+  margin-right: -20px;
+  margin-top: 30px;
+}
+
+/* LISTA ROZWIJANA Z JS */
+
+
+/* główny przycisk rozwijający listę */
+.dropbutton {
+  background-color: #28b78d;
+  color: white;
+  padding-top: 9px;
+  padding-bottom: 9px;
+  padding-left: 50px;
+  padding-right: 50px;
+  min-width: 160px;
+  min-height: 20px;
+  font-size: 16px;
+  border:none;
+  cursor: pointer;
+  margin-top: -15px;
+  
+}
+
+/* główny przycisk zmiana koloru po najechaniu */
+.dropbutton:hover, .dropbutton:focus {
+  background-color: #2aa17e;
+}
+
+/* pozyconowanie przycisku */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  float:right;
+}
+
+/* zawartość listy rozwijanej, domyślnie ukryta */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* linki wewnątrz listy */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* zmiana koloru linków po najechaniu */
+.dropdown a:hover {background-color: #ddd;}
+
+/* pojaż listę rozwijaną JS */
+.show {display: block;}
+.pagin-margin{
+      margin: 40px 0px 0px 1580px;
+}
+

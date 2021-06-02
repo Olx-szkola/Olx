@@ -16,44 +16,79 @@ if(isset($_SESSION['zalogowany']))
 <html>
   <head>
     <?php include('html_includes/header.php'); ?>
+	
   </head>
   <body style="background color:  #f2f2f2;">
-    <form>
+    
     <div class="header" id="headerSticky">
     <div class="header_prefluid">
     <div class="header_fluid">
 
     <a href="index.php"><img class="header_logo" src="uploads/logo2.png"></a>
-
+	<form>
     <input class="form-control me-2 search_bar" type="search" placeholder="szukaj: np: tynkarz" aria-label="Search" autocomplete="off" disabled>
     <button class="btn btn-primary btn_color search_btn"><i class="fas fa-search"></i></button>
     </form>
-    <a class="a_box " href="zmien_dane.php">
-    <i class="far fa-user icon"></i>
-    <span class="">Zmień dane <br> logowania</span></a>
-    <?php
 
-      if((isset($_SESSION['zalogowany'])) && ($_SESSION['zalogowany']==true))
-         {
-           echo "<a class='a_box_logout' href='logout.php'><i class='fas fa-sign-out-alt icon_logout'></i>&nbsp;Wyloguj</a>";
-         }
+	<div class="dropdown">
+	<button onclick="dropdownList()" class="dropbutton">Twoje konto<br></button>
+	<div id="myDropdown" class="dropdown-content">
+	<a href="zmien_dane.php">Zmień dane logowania</a>
+    <a href="logout.php">Wyloguj się</a>
+	
+	<script type="text/javascript">
+	function dropdownList() {
+	document.getElementById("myDropdown").classList.toggle("show");
+	}
 
-    ?>
+	
+	window.onclick = function(event) {
+	if (!event.target.matches('.dropbutton')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+		}
+		}
+		}
+	}
+	function count()
+  {
+    var total=document.getElementById("survey").value;
+    total=total.replace(/\s/g, '');
+    document.getElementById("total").innerHTML="Znaki: "+total.length+"/9000";
+  }
+	</script>
+	
+	</div>
+	</div>
     </div>
     </div>
     </div>
-    <div class="h1_fluid"><h1>Dodaj nowe ogłoszenie</h1></div>
-    <div class="add_ad">
     <form action="posts/add_posts.php" method="POST" enctype="multipart/form-data">
+    <div class="h1_fluid"><h1>Dodaj nowe ogłoszenie</h1></div>
+    <div class="add-ad-title">
+      <strong><label for="survey" class="add_font">Dodaj Tytuł</label></strong>
+      <br>
+      <label  class="">Dodaj tytuł<span style="color:red">*</span></label>
+      <div class="form-floating mb-3">
+      <input type="text" class="form-control" id="title" name="title" placeholder="Tytuł">
+     <label for="floatingInput">Tytuł:</label>
+    </div>
+    </div>
+    <div class="add_ad">
     <br/>
     <strong><label for="survey" class="add_font">Opis usługi</label></strong>
     <br>
     <label for="survey" class="">Opis usługi<span style="color:red">*</span></label>
     </br>
     <div class="form-floating">
-    <textarea onchange="check();" class="form-control"class="name" name="survey" cols="70%" rows="3" id="survey"></textarea>
+    <textarea oninput="check();" onkeyup="count();" class="form-control" class="name" name="survey" cols="70%" rows="3" id="survey"></textarea>
     <label for="floatingTextarea">Opis:</label>
     </div>
+    <p id="total">Znaki: 0/9000</p>
     </div>
     <div class="add_ad2">
     <strong><label for="survey" class="add_font">Rodzaj usługi i zdjęcie</label></strong>
@@ -80,9 +115,10 @@ if(isset($_SESSION['zalogowany']))
       function check(){
       var check = document.getElementById("survey").value;
       var area = document.getElementById("survey");
-      var long = check.length;
+      var long = document.getElementById("survey").value;
+      long = long.replace(/\s/g, '');
       var btn = document.getElementById("btn_submit");
-      if(long>9000)
+      if(long.length>9000)
       {
         btn.setAttribute("disabled", true);
         area.classList.add("is-invalid");
@@ -101,12 +137,19 @@ if(isset($_SESSION['zalogowany']))
     foreach($view as $post): ?>
     
     <div class="new_ad_box"><img class="ad_img" src='<?php echo $post['photo']?>'>
+    
     <br><div class="ad_text"><strong>Wystawiający:&nbsp;<?php echo $post['owner'] ?></strong></div>
     <br><div class="ad_text"><strong>Data dodania:&nbsp;<?php echo $post['data'] ?></strong></div>
     <br><div class="ad_text"><strong>Rodzaj działalności:&nbsp;<?php echo $post['type']?></strong></div>
 	<form method="post" action="edytuj_ogloszenie.php">
 	<input type="hidden" name="id_posta" value="<?php echo $post['id'] ?>">
     <button type="submit" class="btn btn-outline-success btn_up ad_text" id="btn_show">Zmień dane posta</button>
+    </form>
+	<br>
+
+	<form method="post" action="posts/delete_posts.php">
+	<input type="hidden" name="id_posta" value="<?php echo $post['id'] ?>">
+    <button type="submit" class="btn btn-outline-success btn_up ad_text" id="btn_show">Usuń post</button>
     </form>
 	<div  class="collapsible"><i class="fas fa-chevron-down icon_col"></i></div>
     <div id="index" class="content"><p>Opis:</p><?php echo $post['survey']?></div>

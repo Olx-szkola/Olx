@@ -1,11 +1,5 @@
 <?php
 session_start();
-
-$wyszukaj = $_POST['wyszukaj'];
-
-require_once('connect.php');
-        mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-        $view=$conn->query("SELECT * FROM POSTS WHERE type LIKE ('%$wyszukaj%') ORDER BY data DESC");
 ?>
 <!DOCTYPE html>
 <html>
@@ -53,7 +47,42 @@ require_once('connect.php');
 	
     <div class="h1_fluid"><h1>Wyniki wyszukiwania</h1></div>
     <?php
-    foreach($view as $post): ?>
+	
+	$wyszukaj = $_POST['wyszukaj'];
+	
+	require_once('like/show.php');
+    mysqli_select_db($conn, 'olx');
+    $results_per_page = 10;
+    $zapytanie = "SELECT * FROM POSTS";
+    $wynik = mysqli_query($conn,$zapytanie);
+    $number_of_results = mysqli_num_rows($wynik);
+
+    
+
+
+    $number_of_pages = ceil($number_of_results/$results_per_page);
+
+    if(!isset($_GET['page'])){
+      $page= 1;
+    }
+    else {
+      $page = $_GET['page'];
+    }
+
+    $this_page_first_result = ($page-1)*$results_per_page;
+
+    $sql="SELECT * FROM POSTS WHERE type LIKE '%$wyszukaj%' ORDER BY data DESC LIMIT " . $this_page_first_result . ',' .  $results_per_page;
+    $result = mysqli_query($conn, $sql);
+	
+	
+	
+	
+	
+	
+	
+	
+	
+    foreach($result as $post): ?>
     
     <div class="new_ad_box"><img class="ad_img" src='<?php echo $post['photo']?>'>
     <br><div class="ad_text"><strong>Wystawiający:&nbsp;<?php echo $post['owner'] ?></strong></div>
@@ -98,7 +127,56 @@ require_once('connect.php');
 		}
 	}
 	</script>
+	
+<div class="bot">
+<div class="pagin">
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li class="page-item">
+    
+<?php
+if($page >= 2){
+$page_ode = $page - 1;
+}
+else 
+{
+$page_ode = $page;
+}
+echo '
+<a class="page-link" href="szukaj_nazwa.php?page='  . $page_ode .  '"" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>';
+if($page < $number_of_pages)
+{
+  $page_dod = $page + 1;
+}
+else
+{
+  $page_dod = $page;
+}
 
+for ($page_spr=1; $page_spr<=$number_of_pages; $page_spr++) {
+    echo ' <li class="page-item"><a class="page-link"  id='.$page_spr .' href="szukaj_nazwa.php?page='  . $page_spr .  '">' . $page_spr . '</a></li>'; }   
+
+
+echo '<a class="page-link"  href="szukaj_nazwa.php?page='  . $page_dod .  '" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>';
+?>
+</li>
+  </ul>
+</nav>
+</div>
+</div>
+<script type="text/javascript">
+var $_GET = <?php echo json_encode($_GET); ?>;
+function załaduj(){
+var page = document.getElementById(($_GET['page']));
+page.classList.add("p_active");
+}
+
+
+</script>	
   </body>
   </html>
   
