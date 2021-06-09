@@ -323,28 +323,30 @@ margin-top: -16%;
 }
 .ad_text{
   display: block;
-  margin: 0px 0px 0px 230px;
+  margin: 40px 20px 20px 230px;
   width: 300px;
-  font-weight: 400;
   color: #002f34;
   z-index: auto;
 }
-.collapsible{
+#ad-title{
   display: block;
-  width: 100%;
-  cursor: pointer;
-  outline: none;
-  border: none;
-  box-shadow: 0px;
-  height: 40px;
-  background-color: white;
-  text-align: left;
+  margin: -15px 20px 20px 230px;
+  font-weight: 400;
+  color: #002f34;
   z-index: auto;
-  margin-top: 15px;
+  width: auto;
+  height: auto;
+  font-size: large;
+  white-space:nowrap;
+  padding: auto;
+  float:  left;
+  
 }
-.active, .collapsible:hover {
-  border:2px solid;
-  border-color: #f2f2f2;
+#ad-title:hover{
+  width: auto;
+  color:white;
+  background-color: #28b78d;
+  cursor:pointer;
 }
 .content {
   
@@ -384,6 +386,10 @@ margin-top: -16%;
   z-index: auto;
   position: relative;
 }
+.l-size
+{
+  font-size: xx-small;
+}
 .add-ad-title
 {
   display: block;
@@ -416,6 +422,9 @@ margin-top: -16%;
 .error_box{
   box-shadow: 0 0 8px 0 rgba(255,0,0);
 }
+#wrap{
+  margin:auto;
+}
 .btn_float{
   margin-top: 10px;
   float: right;
@@ -427,8 +436,57 @@ margin-top: -16%;
   float: right;
   position: relative;
 }
-
-
+.btn-rework-first
+{
+  float: right;
+  padding: 10px;
+  margin-top: -30px;
+  margin-right: -50px;   
+}
+#container-range{
+  width: 400px;
+  height: auto;
+  margin-left:90%;
+  margin-top: -13%;
+  overflow: hidden;
+  padding-left: 30px;
+}
+.short{
+  width: 20%!important;
+}
+.range-low{
+  margin-right: 10px;
+  float: left;
+  height: auto;
+  width: auto;
+}
+.range-high{
+  height: auto;
+  width: auto;
+  overflow: hidden;
+}
+.low-range{
+  float: left;
+  margin-right: 70px;
+}
+.high-range{
+  margin-left: 70px;
+  overflow: hidden;
+  margin-right: -20px;
+}
+.line{
+  display: inline-block;
+  margin-left: 20px;
+  margin-right: 50px;
+}
+.btn-rework-second
+{
+  float: right;
+  clear: right;
+  padding: 10px;
+  margin-top: -15px;
+  margin-right: -50px;  
+}
 /* Customize the label (the container) */
 .container {
   display: block;

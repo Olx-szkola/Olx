@@ -8,14 +8,16 @@ $type=$_POST['type'];
 $owner=$_SESSION['login'];
 $photo=$_FILES['photo'];
 $data=date("Y-m-d");
+$range_low = $_POST['range_low'];
+$range_high = $_POST['range_high'];
 
 
 
 move_uploaded_file($photo['tmp_name'], '../uploads/'.$photo['name']);
 $path = 'uploads/'.$photo['name'];
 
-$add=$conn->query("INSERT INTO posts(`owner`, `data`, `type`, `survey`, `photo`, `title`)
-VALUES ('$owner','$data','$type','$survey','$path','$title')");
+$add=$conn->query("INSERT INTO posts(`owner`, `data`, `type`, `survey`, `photo`, `title`, `od`, `do`)
+VALUES ('$owner','$data','$type','$survey','$path','$title', '$range_low', '$range_high')");
 
 
 if($add){

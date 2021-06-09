@@ -86,11 +86,15 @@ session_start();
     foreach($result as $post): ?>
     
     <div class="new_ad_box"><img class="ad_img" src='<?php echo $post['photo']?>'>
-    <br><div class="ad_text"><strong>Wystawiający:&nbsp;<?php echo $post['owner'] ?></strong></div>
-    <br><div class="ad_text"><strong>Data dodania:&nbsp;<?php echo $post['data'] ?></strong></div>
-    <br><div class="ad_text"><strong>Rodzaj działalności:&nbsp;<?php echo $post['type']?></strong></div>
-    <div  class="collapsible"><i class="fas fa-chevron-down icon_col"></i></div>
-    <div id="index" class="content"><p>Opis:</p><?php echo $post['survey']?></div>
+    <br><div id="ad-title"><?php echo $post['title'] ?></div>
+    <br>
+    <br>
+    <br><div class="ad_text l-size">Data dodania:&nbsp;<?php echo $post['data'] ?></div>
+    <div id="container-range">
+    <div class="range-low"><strong><?php echo $post['od'] ?>&nbsp;zł&nbsp;-</div></strong>
+    <div class="range-high"><strong><?php echo $post['do'] ?>&nbsp;zł</div></strong> 
+      
+    </div>   
     </div>
     
     <?php endforeach; ?>

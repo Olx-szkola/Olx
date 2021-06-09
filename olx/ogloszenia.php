@@ -78,6 +78,20 @@ if(isset($_SESSION['zalogowany']))
      <label for="floatingInput">Tytuł:</label>
     </div>
     </div>
+    <div class="add-ad-title">
+      <strong><label for="survey" class="add_font">Dodaj zakres cen</label></strong>
+      <br>
+      <label  class="">Dodaj zakres cen<span style="color:red">*</span></label>
+      <div class="form-floating mb-3">
+    
+      <input type="text" class="form-control short low-range" id="range_low" name="range_low" placeholder="Cena od"></input>
+      
+      <input type="text" class="form-control short high-range" id="range_high" name="range_high" label="jhgjh" placeholder="Cena do"></input>
+      
+      
+     
+    </div>
+    </div>
     <div class="add_ad">
     <br/>
     <strong><label for="survey" class="add_font">Opis usługi</label></strong>
@@ -111,8 +125,9 @@ if(isset($_SESSION['zalogowany']))
     <button type="submit" name="send" class="btn btn-outline-success btn_float" id="btn_submit">Wyślij</button>
     </div>
 	</form>
-    <script type="text/javascript">
+  <script type="text/javascript">
       function check(){
+
       var check = document.getElementById("survey").value;
       var area = document.getElementById("survey");
       var long = document.getElementById("survey").value;
@@ -137,24 +152,25 @@ if(isset($_SESSION['zalogowany']))
     foreach($view as $post): ?>
     
     <div class="new_ad_box"><img class="ad_img" src='<?php echo $post['photo']?>'>
-    
-    <br><div class="ad_text"><strong>Wystawiający:&nbsp;<?php echo $post['owner'] ?></strong></div>
-    <br><div class="ad_text"><strong>Data dodania:&nbsp;<?php echo $post['data'] ?></strong></div>
-    <br><div class="ad_text"><strong>Rodzaj działalności:&nbsp;<?php echo $post['type']?></strong></div>
+    <br><div id="ad-title"><?php echo $post['title'] ?></div>
+    <br>
+    <br>
+    <br><div class="ad_text l-size">Data dodania:&nbsp;<?php echo $post['data'] ?></div>   
 	<form method="post" action="edytuj_ogloszenie.php">
 	<input type="hidden" name="id_posta" value="<?php echo $post['id'] ?>">
-    <button type="submit" class="btn btn-outline-success btn_up ad_text" id="btn_show">Zmień dane posta</button>
+  <div id="wrap">
+    <button type="submit" class="btn btn-outline-success btn_up btn-rework-first" id="btn_show">Zmień dane posta</button>
     </form>
 	<br>
 
 	<form method="post" action="posts/delete_posts.php">
 	<input type="hidden" name="id_posta" value="<?php echo $post['id'] ?>">
-    <button type="submit" class="btn btn-outline-success btn_up ad_text" id="btn_show">Usuń post</button>
+    <button type="submit" class="btn btn-outline-success btn_up btn-rework-second" id="btn_show">Usuń post</button>
     </form>
-	<div  class="collapsible"><i class="fas fa-chevron-down icon_col"></i></div>
-    <div id="index" class="content"><p>Opis:</p><?php echo $post['survey']?></div>
-
     </div>
+    </div>
+
+  
 
     
     <?php endforeach; ?>
