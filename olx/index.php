@@ -74,6 +74,8 @@ session_start();
 
     $sql='SELECT * FROM posts ORDER BY data DESC LIMIT ' . $this_page_first_result . ',' .  $results_per_page;
     $result = mysqli_query($conn, $sql);
+
+
   
     
     
@@ -98,6 +100,14 @@ session_start();
     </div>
     
     <?php endforeach; ?>
+    <?php 
+    function create_slug($string){
+   $slug=preg_replace('/[^A-Za-z0-9-]+/', '-', $string);
+   return $slug;
+}
+echo create_slug($post['title']);
+//returns 'does-this-thing-work-or-not'
+    ?>
     <script src="colapse.js" type="text/javascript">
     </script>
     <script type="text/javascript">
@@ -185,6 +195,7 @@ page.classList.add("p_active");
 
 
 </script>
+
   </body>
   </html>
   
