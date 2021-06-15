@@ -11,10 +11,6 @@ body{
 h1{
   display: block;
   font-size: 2em;
-  margin-block-start: 0.67em;
-  margin-block-end: 0.67em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
   font-weight: bold;
 }
 a{color:black;}
@@ -201,7 +197,7 @@ margin-top: -16%;
   transform: translateY(-50%);
 }
 .a_box{
-  margin: 0px 0px 0px 800px;
+  margin: 0px 0px 0px 0px;
   position: relative;
   display: block;
   align-items: center;
@@ -212,6 +208,7 @@ margin-top: -16%;
   padding: 0px 15px 7px 40px;
   padding-left: 42px;
   font-weight: 500;
+  float: right;
 }
 .icon{
   position: absolute;
@@ -323,28 +320,26 @@ margin-top: -16%;
 }
 .ad_text{
   display: block;
-  margin: 0px 0px 0px 230px;
+  margin: 40px 20px 20px 230px;
   width: 300px;
-  font-weight: 400;
   color: #002f34;
   z-index: auto;
 }
-.collapsible{
-  display: block;
-  width: 100%;
-  cursor: pointer;
-  outline: none;
-  border: none;
-  box-shadow: 0px;
-  height: 40px;
-  background-color: white;
-  text-align: left;
+#ad-title{
+  margin: -15px 20px 10px 230px;
+  color: #002f34;
   z-index: auto;
-  margin-top: 15px;
+  width: auto;
+  height: auto;
+  font-size: large;
+  padding: auto;
+  float:  left; 
 }
-.active, .collapsible:hover {
-  border:2px solid;
-  border-color: #f2f2f2;
+#ad-title:hover{
+  width: auto;
+  color:white;
+  background-color: #28b78d;
+  cursor: pointer;
 }
 .content {
   
@@ -384,6 +379,23 @@ margin-top: -16%;
   z-index: auto;
   position: relative;
 }
+.l-size
+{
+  font-size: xx-small;
+}
+.add-ad-title
+{
+  display: block;
+  background-color: #fff;
+  width: 1200px;
+  height: 160px;
+  margin: 40px 0px 0px 500px;
+  position: relative;
+  box-shadow: 0 0 8px 0 rgba(0,0,0,.1);
+  padding: 20px 20px 20px 40px;
+  z-index: auto;
+  position: relative;
+}
 .add_font{
   font-size: 20;
 }
@@ -403,6 +415,9 @@ margin-top: -16%;
 .error_box{
   box-shadow: 0 0 8px 0 rgba(255,0,0);
 }
+#wrap{
+  margin:auto;
+}
 .btn_float{
   margin-top: 10px;
   float: right;
@@ -414,8 +429,61 @@ margin-top: -16%;
   float: right;
   position: relative;
 }
-
-
+.btn-rework-first
+{
+  float: right;
+  padding: 10px;
+  margin-top: -30px;
+  margin-right: -50px;   
+}
+#container-range{
+  width: auto;
+  height: auto;
+  
+  margin-top: -13%;
+  overflow: hidden;
+  padding-left: auto;
+  float: right;
+  display: flex;
+}
+.short{
+  width: 20%!important;
+}
+.range-low{
+  margin-right: 10px;
+  height: auto;
+  width: auto;
+  max-width: auto;
+  float: right;
+}
+.range-high{
+  height: auto;
+  width: auto;
+  max-width: auto;
+  text-align: right;
+}
+.low-range{
+  float: left;
+  margin-right: 70px;
+}
+.high-range{
+  margin-left: 70px;
+  overflow: hidden;
+  margin-right: -20px;
+}
+.line{
+  display: inline-block;
+  margin-left: 20px;
+  margin-right: 50px;
+}
+.btn-rework-second
+{
+  float: right;
+  clear: right;
+  padding: 10px;
+  margin-top: -15px;
+  margin-right: -50px;  
+}
 /* Customize the label (the container) */
 .container {
   display: block;
@@ -482,4 +550,156 @@ margin-top: -16%;
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
+}
+.bot {
+  display: block;
+  height: 300px;
+  width: 100%;
+}
+.p_active{
+  color: white!important;
+  background-color: green!important;
+}
+
+
+.pagin {
+  margin-right: -20px;
+  margin-top: 30px;
+  color: black!important;
+}
+
+/* LISTA ROZWIJANA Z JS */
+
+
+/* główny przycisk rozwijający listę */
+.dropbutton {
+  background-color: #28b78d;
+  color: white;
+  padding-top: 9px;
+  padding-bottom: 9px;
+  padding-left: 50px;
+  padding-right: 50px;
+  min-width: 160px;
+  min-height: 20px;
+  font-size: 16px;
+  border:none;
+  cursor: pointer;
+  margin-top: -15px;
+  
+}
+
+/* główny przycisk zmiana koloru po najechaniu */
+.dropbutton:hover, .dropbutton:focus {
+  background-color: #2aa17e;
+}
+
+/* pozyconowanie przycisku */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  float:right;
+}
+
+/* zawartość listy rozwijanej, domyślnie ukryta */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* linki wewnątrz listy */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* zmiana koloru linków po najechaniu */
+.dropdown a:hover {background-color: #ddd;}
+
+/* pojaż listę rozwijaną JS */
+.show {display: block;}
+.pagin-margin{
+      margin: 40px 0px 0px 1580px;
+}
+.photo-container{
+  display: block;
+  background-color: #fff;
+  width: 50%;
+  height: 3%;
+  margin: 120px 0px 0px 300px;
+  box-shadow: 0 0 8px 0 rgba(0,0,0,.1);
+  padding: 8px 8px 8px 8px;
+  z-index: auto;
+  position: relative;
+}
+#post-photo{
+  object-fit: fill;
+  height: 583px;
+}
+.post-owner-container{
+  display: block;
+  background-color: #fff;
+  width: 20%;
+  height: 1%;
+  margin: -31.5% 13% 0px 0px;
+  box-shadow: 0 0 8px 0 rgba(0,0,0,.1);
+  padding: 8px 8px 8px 8px;
+  z-index: auto;
+  position: relative;
+  float: right;
+}
+#post-avatar{
+  width:  72px;
+  height: 72px;
+  border-radius: 50%;
+  float: left;
+}
+#owner-title{
+  padding-left:  10px;
+}
+.post-container{
+  display: block;
+  background-color: #fff;
+  width: 50%;
+  height: 3%;
+  margin: 50px 0px 50px 300px;
+  box-shadow: 0 0 8px 0 rgba(0,0,0,.1);
+  padding: 12px 12px 22px 12px;
+  z-index: auto;
+  position: relative;
+}
+.ad-font{
+  font-size: 32px;
+  line-height: 42px;
+  word-wrap: break-word;
+}
+.oddo-font{
+  font-size: 40px;
+    line-height: 42px;
+    margin-top: 16px;
+
+}
+#owner-margin{
+  margin-left: 90px;
+  margin-top: -20px;
+}
+.survey-margin{
+  margin-bottom: 15px;
+  word-wrap: break-word;
+}
+#post-id{
+  float: left;
+  margin-bottom: 3px;
+}
+.btn-margin{
+  margin-top: 15px;
+  float: left;
+  z-index: auto;
+  margin-left: 230px;
 }
