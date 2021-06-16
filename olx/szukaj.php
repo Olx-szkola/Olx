@@ -109,9 +109,17 @@ session_start();
     }
 
     $this_page_first_result = ($page-1)*$results_per_page;
-
-    $sql = "SELECT * FROM POSTS WHERE type IN ('$select_murarz' , '$select_tynkarz' , '$select_płytkarz' , '$select_cieśla' , '$select_akrobata') ORDER BY data DESC LIMIT " . $this_page_first_result . ',' .  $results_per_page;
-    $result = mysqli_query($conn, $sql);
+	
+	
+	if($select_murarz == NULL && $select_tynkarz == NULL && $select_płytkarz == NULL && $select_cieśla == NULL && $select_akrobata == NULL)
+		{
+			$sql = "SELECT * FROM POSTS ORDER BY data DESC LIMIT " . $this_page_first_result . ',' .  $results_per_page;
+		}
+	else
+		{
+			$sql = "SELECT * FROM POSTS WHERE type IN ('$select_murarz' , '$select_tynkarz' , '$select_płytkarz' , '$select_cieśla' , '$select_akrobata') ORDER BY data DESC LIMIT " . $this_page_first_result . ',' .  $results_per_page;
+		}
+	$result = mysqli_query($conn, $sql);
 	
 	
 	
