@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 18 Lis 2020, 16:23
--- Wersja serwera: 10.3.15-MariaDB
--- Wersja PHP: 7.1.30
+-- Czas generowania: 06 Gru 2020, 17:10
+-- Wersja serwera: 10.4.14-MariaDB
+-- Wersja PHP: 7.4.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -33,7 +32,7 @@ CREATE TABLE `users` (
   `login` text COLLATE utf8_polish_ci NOT NULL,
   `haslo` text COLLATE utf8_polish_ci NOT NULL,
   `email` text COLLATE utf8_polish_ci NOT NULL,
-  `admin` tinyint(1) NOT NULL
+  `admin` text COLLATE utf8_polish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 --
@@ -41,7 +40,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `login`, `haslo`, `email`, `admin`) VALUES
-(1, 'adam', 'adam', '', 0);
+(1, 'eryk', 'erykeryk', 'eryk@gmail.com', 'erykeryk'),
+(2, 'adam', 'adamadam', 'adam@gmail.com', 'adamadam');
 
 --
 -- Indeksy dla zrzutów tabel
@@ -52,6 +52,16 @@ INSERT INTO `users` (`id`, `login`, `haslo`, `email`, `admin`) VALUES
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT dla zrzuconych tabel
+--
+
+--
+-- AUTO_INCREMENT dla tabeli `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
