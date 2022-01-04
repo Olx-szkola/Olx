@@ -98,8 +98,19 @@ if(isset($_SESSION['zalogowany']))
         <option value="Cieśla">Cieśla</option>
         <option value="Akrobata">akrobata</option>
     </select>
-    <button type="submit" name="send" class="btn btn-outline-success btn_float" id="btn_submit">Wyślij</button>
     </div>
+
+	<div class="add_ad2">
+	<strong><label for="survey" class="add_font">Dodatkowe zdjęcia(opcjonalne)</label></strong>
+	<br>
+	<input class="form-control" type="file" id="formFile" type="file" class="name" name="photos1">
+	<br>
+	<input class="form-control" type="file" id="formFile" type="file" class="name" name="photos2">
+	<br>
+	<input class="form-control" type="file" id="formFile" type="file" class="name" name="photos3">
+	<br>
+	<button type="submit" name="send" class="btn btn-outline-success btn_float" id="btn_submit">Wyślij</button>
+	</div>	
 	</form>
 
   </body>
