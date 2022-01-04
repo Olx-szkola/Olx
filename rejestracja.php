@@ -83,7 +83,7 @@ session_start();
 			}
 			if($flaga==true)
 			{
-				if($polaczenie->query("INSERT INTO users(`id`, `login`, `haslo`, `email`,`admin`) VALUES ('', '$loginr', '$haslo1', '$emailr', '$haslo2' )"))
+				if($polaczenie->query("INSERT INTO users(`id`, `login`, `haslo`, `email`,`admin`) VALUES ('', '$loginr', '$haslo1', '$emailr', '0' )"))
 				{
 				$_SESSION['pass']="<div class='alert alert-success' role='alert'>Udało ci się zarejestrować. Może się teraz zalogować!</div>";
 				header('location:log_rej.php');

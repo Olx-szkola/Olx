@@ -1,5 +1,8 @@
 <?php
 session_start();
+
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -99,8 +102,20 @@ session_start();
     $zapytanie = "SELECT * FROM POSTS WHERE `id` = $id";
     $query = mysqli_query($conn,$zapytanie);
     $wynik = $query->fetch_assoc();
-  ?>
+	
+	$zlicz_like = "SELECT COUNT(*) as total FROM comments WHERE `like`=1 AND `id_post`= $id";
+	$wynik_like = mysqli_query($conn,$zlicz_like);
+	$suma_like = mysqli_fetch_assoc($wynik_like);
+	
+	$zlicz_dislike = "SELECT COUNT(*) as total FROM comments WHERE `like`=0 AND `id_post`= $id";
+	$wynik_dislike = mysqli_query($conn,$zlicz_dislike);
+	$suma_dislike = mysqli_fetch_assoc($wynik_dislike);
 
+	if(isset($_SESSION['admin'])&& $_SESSION['admin']==1)
+	{
+		echo '<a href="storage.php"><div class="h1_fluid"><h1>Wróc do panelu</h1></div></a>';
+	}
+  ?>
   <div class="photo-container"><img id="post-photo" src="<?php echo $wynik['photo'] ?>"></div>
   <div class="post-owner-container"><p id="owner-title">Użytkownik</p><img id="post-avatar" src="uploads/avatar.png">&nbsp;<h2 id="owner-margin"><?php echo $wynik['owner'] ?></h2></div>
   <div class="post-container"><div class="l-size">Data dodania:&nbsp;<?php echo $wynik['data'] ?></div>
@@ -113,8 +128,62 @@ session_start();
   <br>
   <h3>Opis</h3>
   <div class="survey-margin"><?php echo $wynik['survey']?></div>
+  <?php
+  if($wynik['photos1'] != NULL || $wynik['photos2'] != NULL || $wynik['photos3'] != NULL)
+  echo "<h3>Dodatkowe zdjęcia</h3>";
+  ?>
+  <div class="gallery">
+  <div class="photo-gallery"><img class="myImg" id="gallery" src="<?php echo $wynik['photos1'] ?>"></div>
+  <div class="photo-gallery"><img class="myImg" id="gallery" src="<?php echo $wynik['photos2'] ?>"></div>
+  <div class="photo-gallery"><img class="myImg" id="gallery" src="<?php echo $wynik['photos3'] ?>"></div>
+  
+  
+  <!-- The Modal -->
+	<div id="myModal" class="modal">
+	<span class="close">&times;</span>
+	<img class="modal-content" id="img01">
+	<div id="caption"></div>
+	</div>
+  
+  
+  <script type="text/javascript">
+	var modal = document.getElementById('myModal');
+
+	// Get the image and insert it inside the modal - use its "alt" text as a caption
+	var img = document.getElementsByClassName('myImg');
+	var modalImg = document.getElementById("img01");
+	
+
+	var showModal = function(){
+		modal.style.display = "block";
+		modalImg.src = this.src;
+		captionText.innerHTML = this.alt;
+	}
+
+	for (var i = 0; i < img.length; i++) {
+		img[i].addEventListener('click', showModal);
+	}
+
+	// Get the <span> element that closes the modal
+	var span = document.getElementsByClassName("close")[0];
+
+	// When the user clicks on <span> (x), close the modal
+	span.onclick = function() { 
+		modal.style.display = "none";
+	}
+  </script>
+  
+  
+  </div>
   <hr>
+  <div class="post_desc_bot">
   <div id="post-id" class="l-size">ID:&nbsp;<?php echo $wynik['id'] ?></div>
+  <div class="licznik_like">
+  <i class="fas fa-thumbs-up"> </i><?php echo $suma_like['total'] ?> &nbsp
+  <i class="fas fa-thumbs-down"> </i><?php echo $suma_dislike['total'] ?>
+  </div>
+  </div>
+  </div>
   </div>
    <div class="h1_fluid center"><h1>Komentarze</h1></div>
    <div class="post-container"><div class="l-size"></div>
@@ -125,6 +194,17 @@ session_start();
    		&nbsp;<label for="text" class="">Tekst komentarza<span style="color:red">*</span></label>
    		<textarea oninput="check();" onkeyup="count();" placeholder="Tekst" class="form-control" class="name" name="survey" cols="70%" rows="3" id="survey"></textarea>
    		<p id="total">Znaki: 0/200</p>
+		
+		<br>
+		<p> Czy polecasz dane usługi?</p>	
+		<input type="radio" name="like" value="1" class="like_btn" id="radio_id_1" checked><label class="like_label" for="radio_id_1"><i class="fas fa-thumbs-up"></i><span class="like_text">Polecam</span> 
+		</label>
+		&nbsp
+		
+		<input type="radio" name="like" value="0" class="dislike_btn" id="radio_id_0"><label for="radio_id_0" class="like_label"><i class="fas fa-thumbs-down"></i><span class="like_text">Nie polecam</span> 
+		</label>
+		
+		<br><br>
    		<input  type="checkbox" value="" id="checkbox">&nbsp;Zaznacz jeżeli nie jesteś robotem<br><br>
    		<button type="submit" name="send" class="btn btn-outline-success" id="btn_submit">Wyślij</button>
    		<input type="hidden" name="id_post" value="<?php echo $wynik['id'] ?>">
@@ -160,7 +240,7 @@ session_start();
     }
     
     </script>
-
+    <form action="storage/delete_comments.php" method="post">
     <?php
 	include('connect.php');
     $id_post =$wynik['id'];
@@ -172,9 +252,29 @@ session_start();
     ?>
     <div class="post-container"><div class="l-size"></div>
     <div class="com-block"><?php echo $com['text'] ?></div>
+	<?php
+	if($com['like']==1)
+	{
+	echo '<i class="fas fa-thumbs-up"></i>';
+	}
+	else if($com['like']==0)
+	{
+	echo '<i class="fas fa-thumbs-down"></i>';	
+	}	
+	if($_SESSION['admin']==1)
+	{	
+		echo "<button type='submit' name='send' class='btn btn-outline-success licznik_like' id='btn_submit'>usuń</button>";
+
+	}
+	?>
+
+	
     <br><div class="ad_com l-size">Data dodania:&nbsp;<?php echo $com['data'] ?>&nbsp; email:&nbsp;<?php echo $com['email'] ?></div>
+    <input type="hidden" name="id_com" value="<?php echo $com['id_comments']?>">
+    <input type="hidden" name="id_post" value="<?php echo $wynik['id'] ?>">
 	</div>
     <?php endforeach; ?>
+	</form>
     
   </body>
   </html>

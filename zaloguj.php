@@ -20,7 +20,7 @@
   	$haslo = $_POST['haslo'];
 
   	$sql = "SELECT * FROM users WHERE login = '$login' AND haslo = '$haslo'";
-
+  
   	if($rezultat = @$polaczenie->query($sql))
   	{
   		$ilu = $rezultat->num_rows;
@@ -31,11 +31,20 @@
   			$wiersz = $rezultat->fetch_assoc();
   			$_SESSION['id'] = $wiersz['id'];
   			$_SESSION['login'] = $wiersz['login'];
+        $_SESSION['admin'] = $wiersz['admin'];
 
   			unset($_SESSION['blad']);
 
-  			$rezultat->close();
+        if ($_SESSION['admin']==1) {
+          
+          header('location: storage.php');
+          
+        }
+        else{
+         
   			header('location: ogloszenia.php');
+
+        }
 
   		}
   		else
