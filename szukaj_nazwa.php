@@ -1,5 +1,16 @@
 <?php
 session_start();
+
+	$wyszukaj = $_GET['wyszukaj'];
+
+	require_once('like/show.php');
+	mysqli_select_db($conn, 'olx');
+	
+	$zlicz = "SELECT COUNT(*) as total FROM POSTS WHERE type LIKE '%$wyszukaj%' OR title LIKE '%$wyszukaj%'";
+	$wynik_z = mysqli_query($conn,$zlicz);
+	$suma = mysqli_fetch_assoc($wynik_z);
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -67,26 +78,34 @@ session_start();
     </div>
     </div>
     </div>
-    <div class="filtr_container"><form action="szukaj.php" method="get"><h3 style="margin-left: 30px">
-    <br><strong><label class="container">&nbsp; Murarz<input type='submit' name="kategoria" value="murarz"/><span class="checkmark"></span></label></strong>
-    <strong><label class="container">&nbsp; Tynkarz<input type='submit' name="kategoria" value="tynkarz"/><span class="checkmark"></span></label></strong>
-    <strong><label class="container">&nbsp; Płytkarz<input type='submit' name="kategoria" value="płytkarz"/><span class="checkmark"></span></label></strong>
-	<strong><label class="container">&nbsp; Cieśla<input type='submit' name="kategoria" value="cieśla"/><span class="checkmark"></span></label></strong>
-	<strong><label class="container">&nbsp; Akrobata<input type='submit' name="kategoria" value="akrobata"/><span class="checkmark"></span></label></strong>
+    <div class="filtr_container">
+	<h2 class="cat_filter">Kategorie główne</h2>
+	<form action="szukaj.php" method="get"><h3 class="cat_filter">
+    <br>
+	<strong><label class="container"><span style='font-size:28px;'>&rsaquo; </span><span class="cat_span">Murarz</span><input type='submit' name="kategoria" value="murarz"/></label></strong>
+    <strong><label class="container"><span style='font-size:28px;'>&rsaquo; </span><span class="cat_span">Tynkarz</span><input type='submit' name="kategoria" value="tynkarz"/></label></strong>
+    <strong><label class="container"><span style='font-size:28px;'>&rsaquo; </span><span class="cat_span">Płytkarz</span><input type='submit' name="kategoria" value="płytkarz"/></label></strong>
+	<strong><label class="container"><span style='font-size:28px;'>&rsaquo; </span><span class="cat_span">Cieśla</span><input type='submit' name="kategoria" value="cieśla"/></label></strong>
+	<strong><label class="container"><span style='font-size:28px;'>&rsaquo; </span><span class="cat_span">Akrobata</span><input type='submit' name="kategoria" value="akrobata"/></label></strong>
+	<label><button type="submit" name="kategoria" value="" class="btn_filter_reset"> Resetuj filtr</button></label>
 	</h3>
 	</form> 
 	</div>
 	
-    <div class="h1_fluid"><h1>Wyniki wyszukiwania</h1></div>
-    <?php
+    <div class="h1_fluid"><h1>Wyniki wyszukiwania: <?php echo $suma['total'] ?></h1></div>
 	
-	$wyszukaj = $_GET['wyszukaj'];
+	
+    <?php
+	if($suma['total'] == 0)
+	{
+		echo "<div class='h1_fluid'><h1>Brak wyników do podanych parametrów :(</h1></div>";
+	}
+	
 
 	
-	require_once('like/show.php');
-    mysqli_select_db($conn, 'olx');
+	
     $results_per_page = 10;
-    $zapytanie = "SELECT * FROM POSTS WHERE type LIKE '%$wyszukaj%' ORDER BY data DESC";
+    $zapytanie = "SELECT * FROM POSTS WHERE type LIKE '%$wyszukaj%' OR title LIKE '%$wyszukaj%' ORDER BY data DESC";
     $wynik = mysqli_query($conn,$zapytanie);
     $number_of_results = mysqli_num_rows($wynik);
 
@@ -104,7 +123,7 @@ session_start();
 
     $this_page_first_result = ($page-1)*$results_per_page;
 
-    $sql="SELECT * FROM POSTS WHERE type LIKE '%$wyszukaj%' ORDER BY data DESC LIMIT " . $this_page_first_result . ',' .  $results_per_page;
+    $sql="SELECT * FROM POSTS WHERE type LIKE '%$wyszukaj%' OR title LIKE '%$wyszukaj%' ORDER BY data DESC LIMIT " . $this_page_first_result . ',' .  $results_per_page;
     $result = mysqli_query($conn, $sql);
 	
 	

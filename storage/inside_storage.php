@@ -7,7 +7,7 @@ session_start();
 <!DOCTYPE html>
 <html>
   <head>
-    <?php include('html_includes/header.php'); ?>
+    <?php include('../html_includes/header.php'); ?>
 	
   </head>
   <body>
@@ -97,25 +97,13 @@ session_start();
   <?php
   	$url = $_GET['title'];
   	$id = $_GET['id'];
-  	require_once('like/show.php');
+  	require_once('storage_show.php');
     mysqli_select_db($conn, 'olx');
-    $zapytanie = "SELECT * FROM POSTS WHERE `id` = $id";
+    $zapytanie = "SELECT * FROM storage WHERE `id` = $id";
     $query = mysqli_query($conn,$zapytanie);
     $wynik = $query->fetch_assoc();
-	
-	$zlicz_like = "SELECT COUNT(*) as total FROM comments WHERE `like`=1 AND `id_post`= $id";
-	$wynik_like = mysqli_query($conn,$zlicz_like);
-	$suma_like = mysqli_fetch_assoc($wynik_like);
-	
-	$zlicz_dislike = "SELECT COUNT(*) as total FROM comments WHERE `like`=0 AND `id_post`= $id";
-	$wynik_dislike = mysqli_query($conn,$zlicz_dislike);
-	$suma_dislike = mysqli_fetch_assoc($wynik_dislike);
+	?>
 
-	if(isset($_SESSION['admin'])&& $_SESSION['admin']==1)
-	{
-		echo '<a href="storage.php"><div class="h1_fluid"><h1>Wróc do panelu</h1></div></a>';
-	}
-  ?>
   <div class="photo-container"><img id="post-photo" src="<?php echo $wynik['photo'] ?>"></div>
   <div class="post-owner-container"><p id="owner-title">Użytkownik</p><img id="post-avatar" src="uploads/avatar.png">&nbsp;<h2 id="owner-margin"><?php echo $wynik['owner'] ?></h2></div>
   <div class="post-container"><div class="l-size">Data dodania:&nbsp;<?php echo $wynik['data'] ?></div>
@@ -174,40 +162,7 @@ session_start();
   </script>
   
   
-  </div>
-  <hr>
-  <div class="post_desc_bot">
-  <div id="post-id" class="l-size">ID:&nbsp;<?php echo $wynik['id'] ?></div>
-  <div class="licznik_like">
-  <i class="fas fa-thumbs-up"> </i><?php echo $suma_like['total'] ?> &nbsp
-  <i class="fas fa-thumbs-down"> </i><?php echo $suma_dislike['total'] ?>
-  </div>
-  </div>
-  </div>
-  </div>
-   <div class="h1_fluid center"><h1>Komentarze</h1></div>
-   <div class="post-container"><div class="l-size"></div>
-   	<form action="comments/add_comment.php" method="post">
-   		&nbsp;<label for="email" class="">Podaj email<span style="color:red">*</span></label>
-   		<input type="email" class="form-control" oninput="checkmail();" id="exampleFormControlInput1" name="email" placeholder="gmail@gmail.com" id="email">
-   		<br>
-   		&nbsp;<label for="text" class="">Tekst komentarza<span style="color:red">*</span></label>
-   		<textarea oninput="check();" onkeyup="count();" placeholder="Tekst" class="form-control" class="name" name="survey" cols="70%" rows="3" id="survey"></textarea>
-   		<p id="total">Znaki: 0/200</p>
-		
-		<br>
-		<p> Czy polecasz dane usługi?</p>	
-		<input type="radio" name="like" value="1" class="like_btn" id="radio_id_1" checked><label class="like_label" for="radio_id_1"><i class="fas fa-thumbs-up"></i><span class="like_text">Polecam</span> 
-		</label>
-		&nbsp
-		
-		<input type="radio" name="like" value="0" class="dislike_btn" id="radio_id_0"><label for="radio_id_0" class="like_label"><i class="fas fa-thumbs-down"></i><span class="like_text">Nie polecam</span> 
-		</label>
-		
-		<br><br>
-   		<input  type="checkbox" value="" id="checkbox">&nbsp;Zaznacz jeżeli nie jesteś robotem<br><br>
-   		<button type="submit" name="send" class="btn btn-outline-success" id="btn_submit">Wyślij</button>
-   		<input type="hidden" name="id_post" value="<?php echo $wynik['id'] ?>">
+
    		
    		
     	
@@ -219,62 +174,9 @@ session_start();
 
    		</div>   		
    	</form>
-   	<script type="text/javascript">
-      function check(){
-
-      var check = document.getElementById("survey").value;
-      var area = document.getElementById("survey");
-      var long = document.getElementById("survey").value;
-      long = long.replace(/\s/g, '');
-      var btn = document.getElementById("btn_submit");
-      if(long.length>200)
-      {
-        btn.setAttribute("disabled", true);
-        area.classList.add("is-invalid");
-      }
-      else
-      {
-        area.classList.remove("is-invalid");
-        btn.removeAttribute("disabled");
-      }
-    }
-    
-    </script>
-    <form action="storage/delete_comments.php" method="post">
-    <?php
-	include('connect.php');
-    $id_post =$wynik['id'];
-    mysqli_select_db($conn, 'olx');
    	
-    $vie=$conn->query("SELECT * FROM comments WHERE `id_post` = $id_post");
 
-    foreach($vie as $com):
-    ?>
-    <div class="post-container"><div class="l-size"></div>
-    <div class="com-block"><?php echo $com['text'] ?></div>
-	<?php
-	if($com['like']==1)
-	{
-	echo '<i class="fas fa-thumbs-up"></i>';
-	}
-	else if($com['like']==0)
-	{
-	echo '<i class="fas fa-thumbs-down"></i>';	
-	}	
-	if($_SESSION['admin']==1)
-	{	
-		echo "<button type='submit' name='send' class='btn btn-outline-success licznik_like' id='btn_submit'>usuń</button>";
-
-	}
-	?>
-
-	
-    <br><div class="ad_com l-size">Data dodania:&nbsp;<?php echo $com['data'] ?>&nbsp; email:&nbsp;<?php echo $com['email'] ?></div>
-    <input type="hidden" name="id_com" value="<?php echo $com['id_comments']?>">
-    <input type="hidden" name="id_post" value="<?php echo $wynik['id'] ?>">
-	</div>
-    <?php endforeach; ?>
-	</form>
+    
     
   </body>
   </html>

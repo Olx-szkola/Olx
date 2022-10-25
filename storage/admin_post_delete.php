@@ -14,11 +14,11 @@ $add=$conn->query("DELETE FROM posts WHERE `id` = '$id_posta'");
 
 if($add){
 	$_SESSION['win']="Twój post został usunięty.";
-	header('location:../ogloszenia.php');
+	header('location:../storage.php');
 }
 else {
 	$_SESSION['lose']="Nie udało usunąć twojego ogłoszenia";
-	header('location:../ogloszenia.php');
+	header('location:../storage.php');
 }
 
 ?>

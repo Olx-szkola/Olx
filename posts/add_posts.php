@@ -26,16 +26,16 @@ $range_high = $_POST['range_high'];
 move_uploaded_file($photo['tmp_name'], '../uploads/'.$photo['name']);
 $path = 'uploads/'.$photo['name'];
 
-$add=$conn->query("INSERT INTO posts(`owner`, `data`, `type`, `survey`, `photo`, `title`, `od`, `do`, `url`)
+$add=$conn->query("INSERT INTO storage(`owner`, `data`, `type`, `survey`, `photo`, `title`, `od`, `do`, `url`)
 VALUES ('$owner','$data','$type','$survey','$path','$title', '$range_low', '$range_high', '$url')");
 
 
 if($add){
-	$_SESSION['win']="Twoje ogłoszenie zostało dodane.";
-	header('location:../posts.php');
+	$_SESSION['win']="Twoje ogłoszenie zostało dodane do poczekalni.";
+	header('location:../ogloszenia.php');
 }
 else {
-	$_SESSION['lose']="Nie udało się dodać twojego ogłoszenia";
+	$_SESSION['lose']="Nie udało się dodać twojego ogłoszenia do poczekalni";
 	header('location:../ogloszenia.php');
 }
 

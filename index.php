@@ -70,12 +70,15 @@ session_start();
     </div>
     </div>
 	
-    <div class="filtr_container"><form action="szukaj.php" method="get"><h3 style="margin-left: 30px">
-    <br><strong><label class="container">&nbsp; Murarz<input type='submit' name="kategoria" value="murarz"/><span class="checkmark"></span></label></strong>
-    <strong><label class="container">&nbsp; Tynkarz<input type='submit' name="kategoria" value="tynkarz"/><span class="checkmark"></span></label></strong>
-    <strong><label class="container">&nbsp; Płytkarz<input type='submit' name="kategoria" value="płytkarz"/><span class="checkmark"></span></label></strong>
-	<strong><label class="container">&nbsp; Cieśla<input type='submit' name="kategoria" value="cieśla"/><span class="checkmark"></span></label></strong>
-	<strong><label class="container">&nbsp; Akrobata<input type='submit' name="kategoria" value="akrobata"/><span class="checkmark"></span></label></strong>
+    <div class="filtr_container">
+	<h2 class="cat_filter">Kategorie główne</h2>
+	<form action="szukaj.php" method="get"><h3 class="cat_filter">
+    <br>
+	<strong><label class="container"><span style='font-size:28px;'>&rsaquo; </span><span class="cat_span">Murarz</span><input type='submit' name="kategoria" value="murarz"/></label></strong>
+    <strong><label class="container"><span style='font-size:28px;'>&rsaquo; </span><span class="cat_span">Tynkarz</span><input type='submit' name="kategoria" value="tynkarz"/></label></strong>
+    <strong><label class="container"><span style='font-size:28px;'>&rsaquo; </span><span class="cat_span">Płytkarz</span><input type='submit' name="kategoria" value="płytkarz"/></label></strong>
+	<strong><label class="container"><span style='font-size:28px;'>&rsaquo; </span><span class="cat_span">Cieśla</span><input type='submit' name="kategoria" value="cieśla"/></label></strong>
+	<strong><label class="container"><span style='font-size:28px;'>&rsaquo; </span><span class="cat_span">Akrobata</span><input type='submit' name="kategoria" value="akrobata"/></label></strong>
 	</h3>
 	</form> 
 	</div>
@@ -130,7 +133,9 @@ session_start();
     </div>   
     </div>
     
-    <?php endforeach; ?>
+  <?php 
+  $_SESSION['link'] = "?id=".$post['id']."&title=".$post['url'];
+  endforeach; ?>
     
     <script src="colapse.js" type="text/javascript">
     </script>
